@@ -1,0 +1,54 @@
+.contatti {
+  background-image: url('../../../assets/sfondo/sfondoContatti.jpg');
+  height: 100vh;
+  color: white;
+
+  @media all and (max-width:600px) {
+    background-image: url('../../../assets/sfondo/sfondoContattiMobile.jpg');
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: space-between;
+  }
+
+  .titolo-pagina {
+    font-size: calc(15px + 3vw);
+  }
+
+  .contatti-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 150px;
+
+    @media all and (max-width:600px) {
+      margin-top: 20px;
+    }
+
+    .domanda {
+      font-size: calc(5px + 3vw);
+    }
+
+    .titolo-contatti {
+      font-size: calc(15px + 3vw);
+
+      @media all and (max-width:600px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+    }
+
+    .link-contatti {
+      font-size: calc(10px + 3vw);
+    }
+  }
+}
+
+a {
+  color: white;
+
+  &:active {
+    color: red;
+  }
+}

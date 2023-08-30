@@ -1,0 +1,121 @@
+.classifica-galleria-sponsor {
+  .immagine {
+    width: 100%;
+    display: block;
+  }
+
+  .thumbnail {
+    display: block;
+  }
+
+  .galleryClassifica {
+    display: grid;
+    grid-template-columns: 8fr 4fr;
+
+    @media all and (max-width: 1900px) {
+      display: flex;
+      flex-direction: column;
+
+      .classifica {
+        height: calc(820px + 5vw);
+      }
+    }
+  }
+}
+
+.titleIframe {
+  text-align: center;
+  color: white;
+  font-size: 50px;
+  background-image: url("../../../assets/sfondo/bannerini.png");
+  background-size: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 3fr 6fr 3fr;
+
+  @media all and (max-width: 1601px) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contaire-iframe {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .iframe {
+      background-color: #d7d7d7;
+    }
+  }
+}
+
+:host ::ng-deep .custom-galleria {
+  &.p-galleria {
+    &.fullscreen {
+      display: flex;
+      flex-direction: column;
+
+      .p-galleria-content {
+        flex-grow: 1;
+        justify-content: center;
+      }
+    }
+
+    .p-galleria-content {
+      position: relative;
+    }
+
+    .p-galleria-thumbnail-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .p-galleria-thumbnail-items-container {
+      width: 100%;
+    }
+
+    .custom-galleria-footer {
+      display: flex;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: #ffffff;
+
+      >button {
+        background-color: transparent;
+        color: #ffffff;
+        border: 0 none;
+        border-radius: 0;
+        margin: 0.2rem 0;
+
+        &.fullscreen-button {
+          margin-left: auto;
+        }
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+
+    .title-container {
+      >span {
+        font-size: 0.9rem;
+        padding-left: 0.829rem;
+
+        &.title {
+          font-weight: bold;
+        }
+      }
+    }
+
+    .p-link:focus {
+      box-shadow: none;
+    }
+  }
+}

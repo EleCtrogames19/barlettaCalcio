@@ -1,0 +1,28 @@
+.news {
+  background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.407), rgba(87, 87, 87, 0.73)),
+    url('../../../assets/sfondo/sfondoNews.jpg');
+  background-size: cover;
+  height: 100vh;
+
+  .card {
+    background-color: white;
+    border-radius: 10px;
+
+    .immagini {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .dataNews {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 30px;
+    }
+
+    .titoloNews {
+      margin-bottom: 32px;
+      text-align: center;
+      font-size: 30px;
+    }
+  }
+}

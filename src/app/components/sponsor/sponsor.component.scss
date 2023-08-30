@@ -1,0 +1,9 @@
+.sponsor {
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+@media all and (min-width:600px) and (max-width:1601px) {
+    display: grid;
+    grid-template-columns: 6fr 6fr;
+  }
+}

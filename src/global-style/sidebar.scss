@@ -1,0 +1,11 @@
+.sidebar.p-sidebar{
+  background: black;
+  text-transform: uppercase;
+}
+
+.sidebar.p-sidebar .p-sidebar-content{
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}

@@ -1,0 +1,28 @@
+<section class="navbar" *ngIf="width>1000">
+<article></article>
+<article>
+  <ul class="flex gap-7">
+    <h3><a [routerLink]="['/homepage']" routerLinkActive="router-link-active" >home</a></h3>
+    <h3><a [routerLink]="['/news']" routerLinkActive="router-link-active">News</a></h3>
+    <h3><a [routerLink]="['/archivio']" routerLinkActive="router-link-active">Archivio</a></h3>
+    <h3><a [routerLink]="['/calendario']" routerLinkActive="router-link-active">Calendario</a></h3>
+    <h3><a [routerLink]="['/lavocedeisupporters']" routerLinkActive="router-link-active">GuestBook</a></h3>
+    <h3><a [routerLink]="['/contatti']" routerLinkActive="router-link-active">Contatti</a></h3>
+  </ul>
+</article>
+  <article class="mt-2">
+  <img src="assets/sfondo/pallone.png" width="50px" height="50px" alt="accesso alla sezione amministratore"/>
+</article>
+</section>
+
+<section *ngIf="width<=1000">
+      <p-button (click)="sidebarVisible = true" icon="pi pi-bars"styleClass="button"></p-button>
+  <p-sidebar [(visible)]="sidebarVisible" position="left" styleClass="sidebar">
+    <h3><a [routerLink]="['/homepage']" routerLinkActive="router-link-active" >home</a></h3>
+    <h3><a [routerLink]="['/news']" routerLinkActive="router-link-active">News</a></h3>
+    <h3><a [routerLink]="['/archivio']" routerLinkActive="router-link-active">Archivio</a></h3>
+    <h3><a [routerLink]="['/calendario']" routerLinkActive="router-link-active">Calendario</a></h3>
+    <h3><a [routerLink]="['/lavocedeisupporters']" routerLinkActive="router-link-active">GuestBook</a></h3>
+    <h3><a [routerLink]="['/contatti']" routerLinkActive="router-link-active">Contatti</a></h3>
+</p-sidebar>
+</section>

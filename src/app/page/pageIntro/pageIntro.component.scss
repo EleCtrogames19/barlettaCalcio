@@ -1,0 +1,114 @@
+.pageIntro {
+  display: flex;
+  flex-direction: column;
+  @media all and (min-width: 1600px) {
+    display: grid;
+    grid-template-columns: 3fr 6fr 3fr;
+  }
+  .title {
+    text-align: center;
+    filter: drop-shadow(-7px 0 4px rgba(0, 0, 0, 0.76));
+    font-size: 5rem;
+  }
+  .sponsor {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+  }
+  .sponsorEsterno {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .contenuto {
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    .sezione-immagine-entra {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .article-img {
+        display: flex;
+        justify-content: center;
+        .immagine {
+          height: 30vw;
+          width: 80vw;
+          @media all and (min-width: 1600px) {
+            height: 25vw;
+            width: 60vw;
+          }
+        }
+      }
+    }
+  }
+}
+.pageIntroMobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .titleMobile {
+    padding-top: 15px;
+    font-size: 3rem;
+    text-align: center;
+    filter: drop-shadow(-7px 0 4px rgba(0, 0, 0, 0.76));
+  }
+}
+.immagineSponsor {
+  border-radius: 30px;
+}
+.news {
+  @media all and (min-width: 600px) and (max-width:1600px) {
+width: 80%;
+position: relative;
+    left: 10%;
+  }
+  .titleNewsContainer {
+    text-align: center;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-size: 37px;
+    background-image: url("../../../assets/sfondo/bannerini.png");
+    background-size: cover;
+  }
+  .contentNews {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(213, 213, 213, 0.659);
+    height: 165px;
+    overflow-y: scroll;
+    padding: 0 20px;
+    .dataNews {
+      font-size: 24px;
+    }
+    .titleNews {
+      font-size: 22px;
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+    }
+    .linkNews {
+      color: red;
+      text-decoration: none;
+      font-size: 20px;
+    }
+    .descrizioneNews {
+      font-size: 20px;
+    }
+  }
+}
+
+.pageIntro,
+.pageIntroMobile {
+  background-image: url("../../../assets/sfondo/sfondo.jpg");
+  height: 100vh;
+  width: 100vw;
+  @media all and (max-width:600px) {
+    height: 110vh;
+  }
+}
+
+.immagine-mobile {
+  width: 96vw;
+}

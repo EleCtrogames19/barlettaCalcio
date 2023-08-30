@@ -1,0 +1,120 @@
+<!-- pc -->
+<article class="pageIntro" *ngIf="screenWidth > 600">
+  <section *ngIf="screenWidth > 1600">
+    <ng-container
+      *ngTemplateOutlet="squadre; context: { squadre: squadreInit1 }"
+    ></ng-container>
+  </section>
+<section>
+    <p class="text-flicker-in-glow title">barlettacalcio.it</p>
+    <article class="contenuto">
+      <ng-container *ngTemplateOutlet="entrata"></ng-container>
+      <ng-container *ngTemplateOutlet="sponsor"></ng-container>
+      <ng-container *ngTemplateOutlet="news"></ng-container>
+    </article>
+  </section>
+  <section *ngIf="screenWidth > 1600">
+    <ng-container
+      *ngTemplateOutlet="squadre; context: { squadre: squadreInit2 }"
+    ></ng-container>
+  </section>
+</article>
+
+<!-- tablet -->
+<!-- mobile -->
+<article class="pageIntroMobile" *ngIf="screenWidth <= 600">
+  <p class="text-flicker-in-glow titleMobile">barlettacalcio.it</p>
+  <section class="mt-5 mx-2 flex flex-column align-items-center gap-5">
+    <ng-container *ngTemplateOutlet="entrataMobile"></ng-container>
+    <ng-container *ngTemplateOutlet="sponsorMobile"></ng-container>
+    <ng-container *ngTemplateOutlet="news"></ng-container>
+  </section>
+</article>
+
+<!--  template -->
+
+<ng-template #squadre let-squadre="squadre">
+  <section class="flex flex-column justify-center mx-7">
+    <article
+      class="flex justify-content-between mt-7"
+      *ngFor="let items of squadre"
+    >
+      <section *ngFor="let item of items; last as last">
+        <img [src]="item" width="98px" height="120px" alt="squadra"/>
+      </section>
+    </article>
+  </section>
+</ng-template>
+
+<ng-template #news>
+  <section class="news mt-1">
+    <article class="titleNewsContainer text-flicker-in-glow">NEWS</article>
+    <article class="contentNews">
+      <section *ngFor="let news of newsArray">
+        <article class="flex justify-content-center pt-4">
+          <img
+            src="assets/news/news.gif"
+            alt="news"
+            width="60px"
+            height="35px"
+          />
+          <p class="dataNews">{{ news.data }}</p>
+        </article>
+        <P class="titleNews mt-3">{{ news.titoloNews }}</P>
+        <a *ngIf="news.linkNews" [href]="news.urllinkNews" class="linkNews"
+          >Vai alla galleria</a
+        >
+        <p class="descrizioneNews">{{ news.descrizioneNews }}</p>
+      </section>
+    </article>
+  </section>
+</ng-template>
+
+<ng-template #sponsor>
+  <section class="sponsor">
+    <img
+      src="../../../assets/sponsor/G.Faggella.jpg"
+      class="immagineSponsor"
+      width="500vw"
+      alt="sponsor"
+    />
+  </section>
+</ng-template>
+
+<ng-template #sponsorMobile>
+  <section class="sponsor">
+    <img
+      src="../../../assets/sponsor/G.Faggella.jpg"
+      class="immagineSponsor"
+      width="98%"
+      alt="sponsor"
+    />
+  </section>
+</ng-template>
+
+<ng-template #entrata>
+  <section class="sezione-immagine-entra">
+    <article class="article-img">
+      <a href="/homepage">
+        <img
+          src="assets/intro/intro.jpg"
+          alt="Click per entrare..."
+          class="immagine"
+        />
+      </a>
+    </article>
+  </section>
+</ng-template>
+<ng-template #entrataMobile>
+  <section class="sezione-immagine-entra">
+    <article class="article-img-mobile">
+      <a href="/homepage">
+        <img
+          src="assets/intro/intro.jpg"
+          alt="Click per entrare..."
+          class="immagine-mobile"
+        />
+      </a>
+    </article>
+  </section>
+</ng-template>

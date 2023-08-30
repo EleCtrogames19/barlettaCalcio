@@ -1,0 +1,10 @@
+<section class="news">
+  <app-navbar></app-navbar>
+  <section class="flex flex-wrap gap-3">
+    <article *ngFor="let item of newsArray" class="card" (click)="navigaArticolo(item.titoloNews)">
+      <img [src]="item.anteprima" [alt]="item.alt" aria-label="immagine" class="immagini">
+      <p class="dataNews">{{item.data}}</p>
+      <p class="titoloNews">{{item.titoloNews}}</p>
+    </article>
+  </section>
+</section>

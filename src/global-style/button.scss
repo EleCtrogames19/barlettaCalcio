@@ -1,0 +1,22 @@
+.button.p-button {
+  background: transparent;
+  border: none;
+  color: black;
+  &:active,
+  &:enabled:hover,
+  &:enabled:focus {
+    background: red;
+    border: none;
+    color: white;
+  }
+   &:enabled:hover{
+    box-shadow: 0 2px 4px 0 rgba(168, 168, 168, 0.624);
+   }
+  &:enabled:focus {
+    box-shadow: none;
+  }
+  &:active{
+    transform: translateY(1px);
+        box-shadow: 0 1px 1px 0 rgba(168, 168, 168, 0.624);
+  }
+}
