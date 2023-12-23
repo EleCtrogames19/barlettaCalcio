@@ -2,27 +2,123 @@
   background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.407), rgba(87, 87, 87, 0.73)),
     url('../../../assets/sfondo/sfondoNews.jpg');
   background-size: cover;
+  background-attachment: fixed;
   height: 100vh;
+  overflow: auto;
 
   .card {
     background-color: white;
     border-radius: 10px;
+    width: 500px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .immagini {
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
+      width: 100%;
     }
 
     .dataNews {
       margin-top: 32px;
       text-align: center;
-      font-size: 30px;
+      font-size: 20px;
     }
 
     .titoloNews {
       margin-bottom: 32px;
       text-align: center;
       font-size: 30px;
+    }
+
+    .descrizioneNews {
+      padding: 0 20px;
+      font-size: 20px;
+    }
+  }
+}
+.container {
+  display: grid;
+  grid-template-columns: 100% 0%;
+  width: 36%;
+
+  button {
+    background: transparent;
+    border: 0;
+    transform: translateX(-40px);
+    cursor: pointer;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+}
+
+:host ::ng-deep .custom-galleria {
+  &.p-galleria {
+    &.fullscreen {
+      display: flex;
+      flex-direction: column;
+
+      .p-galleria-content {
+        flex-grow: 1;
+        justify-content: center;
+      }
+    }
+
+    .p-galleria-content {
+      position: relative;
+    }
+
+    .p-galleria-thumbnail-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .p-galleria-thumbnail-items-container {
+      width: 100%;
+    }
+
+    .custom-galleria-footer {
+      display: flex;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: #ffffff;
+
+      >button {
+        background-color: transparent;
+        color: #ffffff;
+        border: 0 none;
+        border-radius: 0;
+        margin: 0.2rem 0;
+
+        &.fullscreen-button {
+          margin-left: auto;
+        }
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+
+    .title-container {
+      >span {
+        font-size: 0.9rem;
+        padding-left: 0.829rem;
+
+        &.title {
+          font-weight: bold;
+        }
+      }
+    }
+
+    .p-link:focus {
+      box-shadow: none;
     }
   }
 }

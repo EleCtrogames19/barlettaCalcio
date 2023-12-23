@@ -1,4 +1,4 @@
-<section class="homepage">
+<section class="homepage mx-1">
   <article class="img">
     <img
       src="assets/homepage/headerHomepage.jpg"
@@ -7,93 +7,38 @@
       alt="header homepage"
     />
   </article>
-  <app-navbar></app-navbar>
+  <app-navbar class="margineNavbar"></app-navbar>
   <article class="classifica-galleria-sponsor">
     <section class="flex justify-content-center">
       <img src="assets/sponsor/LogoOftavision.jpg" width="20%" alt="sponsor" />
     </section>
     <section class="galleryClassifica ml-1">
-      <p-galleria
-        #galleria
-        [value]="images"
-        [(activeIndex)]="activeIndex"
-        [numVisible]="5"
-        [showThumbnails]="showThumbnails"
-        [showItemNavigators]="true"
-        [showItemNavigatorsOnHover]="true"
-        [circular]="true"
-        [autoPlay]="true"
-        [transitionInterval]="3000"
-        [containerStyle]="{ width: '100%' }"
-        [containerClass]="galleriaClass()"
-      >
-        <ng-template pTemplate="item" let-item>
-          <img
-            [src]="item.itemImageSrc"
-            class="immagine"
-            [alt]="item.alt"
-            aria-label="immagine"
-          />
-        </ng-template>
-        <ng-template pTemplate="thumbnail" let-item>
-          <div class="grid grid-nogutter justify-content-center">
-            <img
-              [src]="item.thumbnailImageSrc"
-              class="thumbnail"
-              [alt]="item.alt"
-              aria-label="immagine"
-            />
-          </div>
-        </ng-template>
-        <ng-template pTemplate="footer" let-item>
-          <div class="custom-galleria-footer">
-            <button
-              type="button"
-              pButton
-              icon="pi pi-list"
-              (click)="onThumbnailButtonClick()"
-              aria-label="button anteprima piccola"
-            ></button>
-            <span *ngIf="images" class="title-container">
-              <span>{{ activeIndex + 1 }}/{{ images.length }}</span>
-              <span class="title">{{ images[activeIndex].title }}</span>
-              <span>{{ images[activeIndex].alt }}</span>
-            </span>
-            <button
-              type="button"
-              pButton
-              [icon]="'pi pi-window-minimize'"
-              (click)="toggleFullScreen()"
-              class="fullscreen-button"
-              aria-label="button fullScreen"
-            ></button>
-          </div>
-        </ng-template>
-      </p-galleria>
-      <section class="classifica">
+      <app-galleria-dinamica [images]="images" [paginaAttuale]="'homepage'"></app-galleria-dinamica>
+      <div>
         <article class="titleIframe text-flicker-in-glow">
           CLASSIFICA
         </article>
         <iframe
           src="https://www.tuttocampo.it/WidgetV2/Classifica/3e2f3bf2-63e9-4fd0-8c55-feac84621b54"
           width="100%"
-          height="100%"
+          height="750px"
           scrolling="no"
           frameborder="0"
         ></iframe>
-      </section>
+        </div>
     </section>
   </article>
   <article class="container mt-2">
     <app-sponsor [sponsorArray]="sponsorArray1"></app-sponsor>
-    <section class="contaire-iframe">
+    <div class="contaire-iframe">
       <article>
         <p class="titleIframe text-flicker-in-glow">RISULTATI</p>
         <iframe
+        cookieSameSite="None"
           class="iframe"
           src="https://www.tuttocampo.it/WidgetV2/Risultati/3e2f3bf2-63e9-4fd0-8c55-feac84621b54"
           width="100%"
-          height="600"
+          height="530"
           scrolling="no"
           frameborder="0"
         ></iframe>
@@ -101,6 +46,7 @@
       <article>
         <p class="titleIframe text-flicker-in-glow">MARCATORI</p>
         <iframe
+        cookieSameSite="None"
           class="iframe"
           src="https://www.tuttocampo.it/WidgetV2/Marcatori/3e2f3bf2-63e9-4fd0-8c55-feac84621b54"
           width="100%"
@@ -112,10 +58,11 @@
       <article>
         <p class="titleIframe text-flicker-in-glow">PARTITA</p>
         <iframe
+        cookieSameSite="None"
           class="iframe"
           src="https://www.tuttocampo.it/WidgetV2/Partita/3e2f3bf2-63e9-4fd0-8c55-feac84621b54"
           width="100%"
-          height="350"
+          height="273"
           scrolling="no"
           frameborder="0"
         ></iframe>
@@ -126,12 +73,12 @@
           class="iframe"
           src="https://www.tuttocampo.it/WidgetV2/ProssimaPartita/3e2f3bf2-63e9-4fd0-8c55-feac84621b54"
           width="100%"
-          height="350"
+          height="273"
           scrolling="no"
           frameborder="0"
-        ></iframe>
+          ></iframe>
       </article>
-    </section>
+    </div>
     <app-sponsor [sponsorArray]="sponsorArray2"></app-sponsor>
   </article>
 </section>

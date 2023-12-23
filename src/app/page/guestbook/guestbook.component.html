@@ -1,0 +1,76 @@
+<article id="guest">
+  <section>
+    <app-navbar></app-navbar>
+  </section>
+  <section class="guest">
+    <section class="sponsor">
+       <p-button
+        label="nuova News"
+        styleClass="button2"
+        (onClick)="attivaDialogoNuovaNews(true,undefined)"
+      ></p-button>
+    </section>
+    <section class="sfondo">
+      <section class="mt-5 flex justify-content-center">
+    <p-paginator
+      [style]="{ width: 'max-content' }"
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="10"
+      [currentPageReportTemplate]="'{currentPage} su {totalPages}'"
+      [showCurrentPageReport]="true"
+      [totalRecords]="totalRecords"
+    ></p-paginator>
+  </section>
+      <section
+        class="messaggioContainer mt-7 mx-3"
+        [ngClass]="
+          messaggio.nome === 'admin' ? 'align-items-end' : 'align-items-start'
+        "
+        *ngFor="let messaggio of messaggi"
+      >
+        <section class="card">
+          <section class="intestazione">
+            <p>{{ messaggio.nome }}</p>
+            <img
+              class="logo"
+              src="../../../assets/guestbook/logoMessaggio.png"
+              alt="logo messaggio"
+            />
+          </section>
+          <section class="messaggio">
+            <section class="flex flex-column gap-3 p-3">
+              <p>email: {{ messaggio.email }}</p>
+              <p>residenza: {{ messaggio.residenza }}</p>
+              <p>sito: {{ messaggio.sito }}</p>
+              <p>data: {{ messaggio.dataInserimento }}</p>
+            </section>
+            <section class="messaggioCitazioneUtente">
+              <div class="citazioneContainer">
+                <span class="citazione" *ngIf="messaggio.citazione">
+                  <strong>{{ messaggio.nomeCitazione }}</strong>
+                  <p>{{ messaggio.citazione }}</p>
+                </span>
+              </div>
+              <div class="messaggioUtenteContainer">
+                <p class="messaggioUtente">{{ messaggio.messaggio }}</p>
+              </div>
+              <p-button
+                class="mt-5 flex justify-content-end w-full"
+                styleClass="button2"
+                (onClick)="attivaDialogoNuovaNews(true,{nomeCitazione:messaggio.nome,citazione:messaggio.messaggio})"
+                >CITAZIONE</p-button
+              >
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>
+    <section class="sponsor2">
+
+    </section>
+  </section>
+</article>
+<section *ngIf="nuovaNews">
+  <app-messaggio [citazione]="citazione" (invioNuovaNews)="nuovaNewsService($event)" ></app-messaggio>
+</section>

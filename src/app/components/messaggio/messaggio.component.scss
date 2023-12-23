@@ -1,0 +1,117 @@
+.messaggioContainer {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 160px;
+  width: 100%;
+
+  .card {
+    background-color: white;
+    width: 60%;
+    -webkit-box-shadow: 5px 1px 7px 2px rgba(0, 0, 0, 0.65);
+    box-shadow: 5px 1px 7px 2px rgba(0, 0, 0, 0.65);
+    border-top-right-radius: 27px;
+    border-top-left-radius: 27px;
+
+
+    .intestazione {
+      padding-left: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      font-size: 30px;
+      background-image: url("../../../assets/sfondo/bannerini.png");
+      background-size: cover;
+      border-top-right-radius: 27px;
+      border-top-left-radius: 27px;
+    }
+
+    .emoji-mart {
+      position: absolute;
+      top: 430px;
+
+      @media all and (max-width: 990px) {
+        top: 250px;
+      }
+    }
+
+    .messaggio {
+      padding: 25px 15px;
+      display: grid;
+      grid-template-columns: 3fr 9fr;
+
+      .containerElementiIntestazioneMessaggio {
+        padding-right: 10px;
+        border-right: 1px solid red;
+      }
+
+      .containerElementiMessaggio {
+        padding-left: 10px;
+        border-left: 1px solid red;
+
+        .citazioneContainer {
+          display: flex;
+          justify-content: flex-start;
+
+          .citazione {
+            width: 47%;
+            background-color: #efefef;
+            border: 1px dashed #FF0000;
+            text-align: left;
+          }
+        }
+      }
+
+      .elementiMessaggio {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        .messaggioUtente {
+          text-align: right;
+        }
+      }
+
+      @media all and (max-width: 900px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .containerElementiIntestazioneMessaggio {
+          padding-right: 0px;
+          border-right: none;
+
+          .elementiMessaggio {
+            align-items: flex-start;
+
+            .messaggioUtente {
+              text-align: left;
+            }
+          }
+        }
+
+        .containerElementiMessaggio {
+          padding-left: 0px;
+          border-left: none;
+        }
+      }
+    }
+  }
+
+  @media all and (max-width:560px) {
+    top:120px;
+    .card {
+      width: 100%;
+    }
+  }
+}
+
+:host ::ng-deep .emoji-mart-dark {
+  width: 36vw !important;
+
+  @media all and (max-width: 850px) {
+    width: 57vw !important
+  }
+}

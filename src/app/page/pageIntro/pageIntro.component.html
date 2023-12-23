@@ -36,11 +36,11 @@
 <ng-template #squadre let-squadre="squadre">
   <section class="flex flex-column justify-center mx-7">
     <article
-      class="flex justify-content-between mt-7"
+      class="flex justify-content-between mt-6"
       *ngFor="let items of squadre"
     >
-      <section *ngFor="let item of items; last as last">
-        <img [src]="item" width="98px" height="120px" alt="squadra"/>
+      <section *ngFor="let item of items">
+        <img [src]="item" alt="squadra"/>
       </section>
     </article>
   </section>
@@ -75,7 +75,7 @@
     <img
       src="../../../assets/sponsor/G.Faggella.jpg"
       class="immagineSponsor"
-      width="500vw"
+      width="450vw"
       alt="sponsor"
     />
   </section>

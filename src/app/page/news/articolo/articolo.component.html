@@ -1,3 +1,20 @@
 <section class="articolo">
-  <img [src]="articolo?.img" [alt]="articolo?.alt" aria-label="immagine">
+  <app-navbar class="w-full fixed"></app-navbar>
+  <section class="sponsor">
+    <img
+      src="../../../assets/sponsor/G.Faggella.jpg"
+      class="immagineSponsor"
+      alt="sponsor"
+      class="imgSponsor"
+    />
+  </section>
+  <section class="card mb-5">
+
+    <img [src]="articolo?.img" [alt]="articolo?.alt" aria-label="immagine" />
+    <p class="titoloNews mt-5" aria-label="titoloNews">{{ articolo?.titoloNews }}</p>
+    <p class="dataNews mt-3" aria-label="dataNews">ufficio stampa supporters web site del: {{ articolo?.data }}</p>
+    <p class="descrizioneNews mt-6" aria-label="descrizioneNews">
+      {{ articolo?.descrizioneNews }}
+    </p>
+  </section>
 </section>

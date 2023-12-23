@@ -65,6 +65,7 @@ export class PageIntroComponent implements OnInit, OnDestroy {
   }
 
   caricamentoSquadre() {
+
     this.squadreInit1 = [
       ['assets/intro/squadre/asdBarletta.png', 'assets/intro/squadre/BitontoCalcio.png'],
       ['assets/intro/squadre/CasaranoCalcio.png', 'assets/intro/squadre/Cavese1919.png'],

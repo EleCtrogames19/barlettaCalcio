@@ -2,6 +2,7 @@
   background: transparent;
   border: none;
   color: black;
+
   &:active,
   &:enabled:hover,
   &:enabled:focus {
@@ -9,14 +10,95 @@
     border: none;
     color: white;
   }
-   &:enabled:hover{
+
+  &:enabled:hover {
     box-shadow: 0 2px 4px 0 rgba(168, 168, 168, 0.624);
-   }
+  }
+
   &:enabled:focus {
     box-shadow: none;
   }
-  &:active{
+
+  &:active {
     transform: translateY(1px);
-        box-shadow: 0 1px 1px 0 rgba(168, 168, 168, 0.624);
+    box-shadow: 0 1px 1px 0 rgba(168, 168, 168, 0.624);
+  }
+}
+
+.button1.p-button {
+  background: transparent;
+  border: none;
+  color: black;
+
+  &:active,
+  &:enabled:hover,
+  &:enabled:focus {
+    background: transparent;
+    border: none;
+    color: red;
+  }
+
+  &:enabled:hover {
+    box-shadow: 0 2px 4px 0 rgba(168, 168, 168, 0.624);
+    background-color: red;
+  }
+
+  &:enabled:focus {
+    box-shadow: none;
+  }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 1px 0 rgba(168, 168, 168, 0.624);
+  }
+}
+
+.button2.p-button {
+  background: red;
+  border: none;
+  color: white;
+
+  &:active,
+  &:enabled:hover,
+  &:enabled:focus {
+    border: none;
+    color: white;
+    box-shadow: none;
+  }
+
+  &:enabled:hover {
+    box-shadow: 0 2px 4px 0 rgba(168, 168, 168, 0.624);
+    background-color: white;
+    color: red;
+  }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 1px 0 rgba(168, 168, 168, 0.624);
+  }
+}
+
+.buttonDisabilita.p-button {
+  background: grey;
+  border: none;
+  color: white;
+
+  &:active,
+  &:enabled:hover,
+  &:enabled:focus {
+    border: none;
+    color: white;
+    box-shadow: none;
+  }
+
+  &:enabled:hover {
+    box-shadow: 0 2px 4px 0 rgba(168, 168, 168, 0.624);
+    background-color: white;
+    color: red;
+  }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 1px 0 rgba(168, 168, 168, 0.624);
   }
 }

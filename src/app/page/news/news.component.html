@@ -1,10 +1,56 @@
 <section class="news">
   <app-navbar></app-navbar>
-  <section class="flex flex-wrap gap-3">
-    <article *ngFor="let item of newsArray" class="card" (click)="navigaArticolo(item.titoloNews)">
-      <img [src]="item.anteprima" [alt]="item.alt" aria-label="immagine" class="immagini">
-      <p class="dataNews">{{item.data}}</p>
-      <p class="titoloNews">{{item.titoloNews}}</p>
+  <section class="flex align-items-center flex-column mt-2 mb-5">
+    <label for="stagione">Stagione</label>
+    <p-dropdown
+      [options]="stagioni"
+      [(ngModel)]="stagione"
+      inputId="stagione"
+      (onChange)="cambioStagione()"
+    ></p-dropdown>
+  </section>
+
+  <section
+    *ngIf="typePage === 'news'"
+    class="flex flex-wrap gap-3 justify-content-center mx-2"
+  >
+    <article
+      *ngFor="let item of newsArray"
+      class="card"
+      (click)="navigaArticolo(item.id)"
+    >
+      <img
+        [src]="item.anteprima"
+        [alt]="item.alt"
+        aria-label="immagine"
+        class="immagini"
+      />
+      <p class="dataNews">
+        ufficio stampa supporters web site del: {{ item.data }}
+      </p>
+      <p class="titoloNews">{{ item.titoloNews }}</p>
+      <p class="descrizioneNews mb-5">{{ item.descrizioneNews }}</p>
     </article>
+  </section>
+
+  <section *ngIf="typePage === 'archivio'">
+    <section>
+      <app-galleria-dinamica
+        [images]="images"
+        [paginaAttuale]="typePage"
+        [video]="video"
+      ></app-galleria-dinamica>
+    </section>
+  </section>
+  <section class="mt-5 flex justify-content-center" *ngIf="typePage === 'news'">
+    <p-paginator
+      [style]="{ width: 'max-content' }"
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="rows"
+      [rowsPerPageOptions]="[10, 20, 30]"
+      [alwaysShow]="true"
+      [totalRecords]="totalRecords"
+    ></p-paginator>
   </section>
 </section>

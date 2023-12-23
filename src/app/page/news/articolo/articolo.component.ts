@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { newsArticolo } from '../../../models/interfacce';
+import { newsService } from '../../../service/news.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-articolo',
@@ -9,13 +11,14 @@ import { newsArticolo } from '../../../models/interfacce';
 })
 export class ArticoloComponent implements OnInit {
   articolo: newsArticolo|undefined;
+  id: number = 0;
   subscription: Subscription= new Subscription;
-  constructor () {
-    this.articolo=JSON.parse(localStorage.getItem('articolo')||'')
+  constructor (private newsService: newsService, private route: ActivatedRoute) {
+    this.route.params.subscribe(item => this.id = item['titolo']);
   }
 
   ngOnInit() {
-    console.log(this.articolo)
+     this.newsService.getNewById(this.id).subscribe((item) => {this.articolo=item});
   }
 
 }

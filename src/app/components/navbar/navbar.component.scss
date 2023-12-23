@@ -1,5 +1,5 @@
 .navbar {
-background-color: black;
+  background-color: black;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -7,23 +7,29 @@ background-color: black;
   font-size: 20px;
   text-transform: uppercase;
   position: relative;
-    top: -4px;
-    height:60px;
+  height: 60px;
 }
+
 ul {
   list-style-type: none;
 }
+
 a {
-  &:link,&:visited{
+
+  &:link,
+  &:visited {
     text-decoration: none;
     color: white;
     background-color: transparent;
   }
-  &:hover, &:active{
+
+  &:hover,
+  &:active {
     text-decoration: overline;
     color: red#aaa;
   }
 }
+
 .router-link-active {
-    border-bottom: 1px solid red;
+  border-bottom: 1px solid red;
 }

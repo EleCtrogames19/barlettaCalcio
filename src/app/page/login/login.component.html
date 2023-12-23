@@ -1,0 +1,33 @@
+<section class="login">
+  <section class="card">
+    <h1 class="titolo mb-3">Login Admin</h1>
+    <form [formGroup]="credenziali">
+      <section class="credenziali">
+        <div>
+          <p class="titoloCredenziali">username</p>
+          <input
+            pInputText
+            formControlName="username"
+            type="email"
+            id="username"
+            class="w-full"
+          />
+        </div>
+        <div>
+          <p class="titoloCredenziali">password</p>
+          <input
+            pInputText
+            formControlName="password"
+            type="password"
+            id="password"
+            class="w-full"
+          />
+        </div>
+      </section>
+    </form>
+    <div class="flex justify-content-end mt-5 gap-5">
+    <p-button label="Guest" styleClass="button2" (onClick)="guest()"></p-button>
+    <p-button label="Login" [styleClass]="credenziali.invalid?'buttonDisabilita':'button2'" (onClick)="login()" [disabled]="credenziali.invalid"></p-button>
+  </div>
+  </section>
+</section>

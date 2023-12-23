@@ -4,17 +4,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
 import { PageIntroModule } from './page/pageIntro/pageIntro.module';
-
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { environment } from '../environments/environment';
-
+import { HttpClientModule } from '@angular/common/http';
+import { newsService } from './service/news.service';
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, PageIntroModule,
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore())],
-  providers: [],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, PageIntroModule, HttpClientModule],
+  providers: [newsService, ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

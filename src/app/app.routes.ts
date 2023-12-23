@@ -12,10 +12,6 @@ const routes: Routes = [
     loadChildren: () => import('./page/homepage/homepage.module').then((m) => m.HomepageModule),
   },
   {
-    path: 'calendario',
-    loadChildren: () => import('./page/calendario/calendario.module').then((m) => m.CalendarioModule),
-  },
-  {
     path: 'contatti',
     loadChildren: () => import('./page/contatti/contatti.module').then((m) => m.ContattiModule),
   },
@@ -28,6 +24,22 @@ const routes: Routes = [
     loadChildren: () => import('./page/news/articolo/articolo.module').then((m) => m.ArticoloModule),
   },
   {
+    path: 'archivio',
+    loadChildren: () => import('./page/news/news.module').then((m) => m.NewsModule),
+  },
+  {
+    path: 'guestbook',
+    loadChildren: () => import('./page/guestbook/guestbook.module').then((m) => m.GuestbookModule),
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./page/login/login.module').then((m) => m.LoginModule),
+  },
+  {
+    path: 'amministratore',
+    loadChildren: () => import('./page/admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
     path: '**',
     component: PageIntroComponent,
   },
@@ -36,6 +48,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [provideRouter(routes, withComponentInputBinding())],
+  providers: [provideRouter(routes)],
 })
 export class AppRoutingModule {}

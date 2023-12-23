@@ -1,12 +1,17 @@
 export interface Immagine {
+  id: string;
   itemImageSrc: string;
   thumbnailImageSrc: string;
   alt: string;
   title: string;
 }
+export interface Video {
+  id: string;
+  itemVideoSrc: string;
+  type: string;
+}
 
-export interface Sponsor
-{
+export interface Sponsor {
   src: string;
 }
 
@@ -21,4 +26,23 @@ export interface newsArticolo {
   descrizioneNews: string;
   linkNews: boolean;
   urllinkNews: '/';
+}
+
+export interface datiUtente {
+  label: string;
+  valore: string;
+  placeholder: string;
+}
+
+export interface messaggioUtente {
+  id?: number;
+  nome: string;
+  dataInserimento: string;
+  messaggio: string;
+  nomeCitazione:string;
+  citazione: string;
+  email: string;
+  sito: string;
+  residenza: string;
+  accettato: string;
 }
