@@ -1,4 +1,41 @@
 <section class="adminHome">
-  
-  <h1>Benvenuto Admin</h1>
+  <app-navbar></app-navbar>
+  <section class="contenuto">
+    <ng-container
+      *ngIf="screenWidth > 1000; then sidebarDesktop"
+    ></ng-container>
+    <section class="router">
+      <ng-container *ngIf="isHome; then home; else router"></ng-container>
+    </section>
+  </section>
 </section>
+
+<!-- template -->
+<ng-template #home>
+  <section class="home ml-4">
+    <h1>Benvenuto Admin</h1>
+  </section>
+</ng-template>
+
+<ng-template #router>
+  <section>
+    <router-outlet></router-outlet>
+  </section>
+</ng-template>
+
+<ng-template #sidebarDesktop>
+  <section class="sidebar">
+    <p class="titoloSidebar">Barletta Calcio</p>
+    <h3 class="" (click)="navigazione('foto')">New Foto</h3>
+    <h3 class="" (click)="navigazione('video')">New Video</h3>
+    <h3 class="" (click)="navigazione('news')">New News</h3>
+    <h3 class="" (click)="navigazione('messaggi')">Approvazione Messaggi</h3>
+  </section>
+</ng-template>
+<!-- <ng-template #sidebarMobile>
+  <i class="pi pi-image" (click)="navigazione('foto')"></i>
+  <i class="pi pi-video" (click)="navigazione('video')"></i>
+  <i class="pi pi-book" (click)="navigazione('news')"></i>
+  <i class="pi pi-envelope" (click)="navigazione('messaggi')"></i>
+  <p class="titoloSidebar rotazione mt-8">Barletta Calcio</p>
+</ng-template> -->

@@ -1,0 +1,145 @@
+<section class="newAdmin">
+  <h1 class="titolo mt-3" *ngIf="screenWidth > 1000">Aggiungi una nuova News</h1>
+
+  <section class="card mt-3">
+    <p class="titoloCard">News</p>
+    <section class="form mt-3">
+      <section
+        class="flex justify-content-center w-full gap-3"
+        *ngIf="immagini?.length === 2 && !step2"
+      >
+        <img
+          [src]="anteprimaImmagine.url"
+          [alt]="anteprimaImmagine.alt"
+          aria-label="immagine"
+          class="immagini"
+          height="50%"
+          width="50%"
+        />
+        <p-button
+          icon="pi pi-trash"
+          styleClass="button2"
+          (onClick)="pulisciImmagini()"
+        ></p-button>
+      </section>
+      <section
+        class="flex flex-wrap gap-3"
+        [ngClass]="
+          screenWidth > 1000
+            ? 'justify-content-between'
+            : 'justify-content-center'
+        "
+        *ngIf="immagini?.length !== 2 && !step2"
+      >
+        <section *ngFor="let item of elementiPath">
+          <p-fileUpload
+            [disabled]="attivaUpload || item.disattiva"
+            mode="basic"
+            name="foto[]"
+            id="foto"
+            accept="image/*"
+            [multiple]="false"
+            (uploadHandler)="uploadHandler($event, item.label)"
+            [auto]="true"
+            [chooseLabel]="item.label | titlecase"
+            [customUpload]="true"
+            [fileLimit]="2"
+            [invalidFileLimitMessageSummary]="
+              'Devi caricare massimo due file, foto e anteprima'
+            "
+            pTooltip="Per sbloccare l'upload devi inserire la stagione"
+            styleClass="buttonUpload"
+          ></p-fileUpload>
+        </section>
+      </section>
+      <!-- step 1 -->
+      <section
+        [ngClass]="
+          screenWidth > 1000
+            ? 'flex flex-wrap'
+            : 'flex flex-column align-items-center'
+        "
+        *ngIf="!step2"
+      >
+        <section
+          *ngFor="let item of elementiInput1; index as index"
+          class="mt-3"
+          [ngClass]="screenWidth > 1000 ? 'w-6' : 'w-11'"
+        >
+          <span class="p-float-label mt-3">
+            <input
+              class="input w-11"
+              pInputText
+              [id]="item.label"
+              [(ngModel)]="item.valore"
+              (ngModelChange)="aggiornaDisattiva(item.label)"
+            />
+            <label htmlFor="alt" class="label">{{ item.label }}</label>
+          </span>
+        </section>
+        <section class="flex justify-content-end w-full mt-5">
+          <p-button
+            label="Step 2"
+            [styleClass]="!step1Completo() ? 'buttonDisabilita' : 'button2'"
+            (onClick)="step2Event()"
+            [disabled]="!step1Completo()"
+          ></p-button>
+        </section>
+      </section>
+      <!--  step 2 -->
+      <section
+        [ngClass]="
+          screenWidth > 1000
+            ? 'flex flex-wrap'
+            : screenWidth>450?'flex flex-column display align-items-center':'flex flex-column display'
+        "
+        *ngIf="step2"
+      >
+        <section
+          *ngFor="let item of elementiInput2; index as index"
+          class="w-6 mt-3"
+        >
+          <span
+            class="p-float-label mt-3"
+            *ngIf="item.label === 'descrizione'"
+          >
+            <textarea
+              id="float-input"
+              [rows]="screenWidth>1000?'8':'3'"
+              [cols]="screenWidth>1000?'48':'23'"
+              pInputTextarea
+               [(ngModel)]="item.valore"
+            ></textarea>
+            <label for="float-input">Descrizione News</label>
+          </span>
+          <span
+            class="p-float-label mt-3"
+            *ngIf="item.label !== 'descrizione'"
+          >
+            <input
+              [ngClass]="screenWidth > 1000 ? 'w-11' : screenWidth>700?'':'w-10rem'"
+              class="input"
+              pInputText
+              [id]="item.label"
+              [(ngModel)]="item.valore"
+            />
+            <label htmlFor="alt" class="label">{{ item.label }}</label>
+          </span>
+        </section>
+        <section class="flex justify-content-end w-full" [ngClass]="screenWidth > 800 ?'mt-8':'mt-3'">
+          <p-button
+            label="Step 1"
+            [styleClass]="'button2'"
+            (onClick)="step1Event()"
+          ></p-button>
+          <p-button
+            label="Salva"
+            [styleClass]="!step2Completo() ? 'buttonDisabilita' : 'button2'"
+            (onClick)="salva()"
+            [disabled]="!step2Completo() "
+            ></p-button>
+        </section>
+      </section>
+    </section>
+  </section>
+</section>

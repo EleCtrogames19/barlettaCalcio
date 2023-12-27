@@ -1,4 +1,49 @@
-.adminHome{
-  display: grid;
-  grid-template-columns: 3fr 9fr;
+.adminHome {
+  height: 100%;
+
+  .contenuto {
+    display: flex;
+    height: calc(100% - 60px);
+
+    @media all and (max-width:1000px) {
+      height: calc(100% - 45px);
+    }
+
+    .sidebar {
+      padding: 20px;
+      background-color: red;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      color: white;
+
+      @media all and (max-width:1000px) {
+        width: 75px;
+      }
+
+      .titoloSidebar {
+        font-size: calc(1.5rem + 1vw);
+        text-align: center;
+      }
+
+      .rotazione {
+        transform: rotate(-90deg);
+      }
+    }
+
+    .router {
+      display: flex;
+      .home {
+        display: flex;
+        justify-content: center;
+        padding-top: 250px;
+        font-size: 6vw;
+
+        @media all and (max-width:1000px) {
+          font-size: 8vw;
+        }
+      }
+    }
+  }
 }

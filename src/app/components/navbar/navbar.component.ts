@@ -10,13 +10,23 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   width: number = 0;
   sidebarVisible: boolean = false;
+  loggato: boolean = false;
 
   constructor(private dimensioneSchermoService: DimensioneSchermoService, private router: Router) {}
 
-  ngOnInit():void {
-    this.dimensioneSchermoService.width.subscribe((item) => (this.width = item));
+  ngOnInit(): void {
+    this.dimensioneSchermoService.width.subscribe((item: number): number => (this.width = item));
+    this.dimensioneSchermoService.isLoggato.subscribe((loggato: boolean): boolean => (this.loggato = loggato));
+    setInterval(() => {
+       this.dimensioneSchermoService.isLoggato.next(sessionStorage.getItem('a') === 'barlettaCalcio');
+     }, 1000);
   }
-  login() {
-    this.router.navigate(['login'])
-  };
+  login(): void {
+    if (this.loggato) {
+      this.router.navigate(['amministratore']);
+    } else {
+      this.router.navigate(['login']);
+    }
+  }
+
 }

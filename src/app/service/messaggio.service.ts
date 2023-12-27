@@ -17,4 +17,5 @@ export class MessageService {
   postMessaggio(messaggio: messaggioUtente): Observable<any> {
     return this.http.post<any>('http://localhost/database/queryMessaggio.php', messaggio).pipe(map((res) => res));
   }
+  
 }

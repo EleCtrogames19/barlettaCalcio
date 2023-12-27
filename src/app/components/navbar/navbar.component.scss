@@ -33,3 +33,9 @@ a {
 .router-link-active {
   border-bottom: 1px solid red;
 }
+
+.display{
+  display: flex;
+  flex-direction: column;
+  gap:40px
+}

@@ -25,7 +25,7 @@ export interface newsArticolo {
   titoloNews: string;
   descrizioneNews: string;
   linkNews: boolean;
-  urllinkNews: '/';
+  urllinkNews: string;
 }
 
 export interface datiUtente {

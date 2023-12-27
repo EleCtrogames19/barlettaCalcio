@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
+import { newsArticolo } from '../models/interfacce';
 
 @Injectable({
   providedIn: 'root',
@@ -23,14 +24,7 @@ export class newsService {
     return this.http.get<any>('http://localhost/database/queryNews.php?stagioneDa=' + stagioneDa + '&stagioneA=' + stagioneA).pipe(map((res) => res));
   }
 
-  creaCategoria(categoria: any): Observable<any> {
-    return this.http.post<any>('http://localhost/database/queryNews.php', categoria).pipe(map((res) => res));
-  }
-
-  updateCategoria(categoria: any): Observable<any> {
-    return this.http.put<any>('http://localhost/database/queryNews.php?id=' + categoria.id, categoria).pipe(map((res) => res));
-  }
-  deleteCategoria(id: number): Observable<any[]> {
-    return this.http.delete<any[]>('http://localhost/database/queryNews.php?id=' + id).pipe(map((res) => res));
+  creaNews(news: newsArticolo): Observable<any> {
+    return this.http.post<any>('http://localhost/database/queryNews.php', news).pipe(map((res) => res));
   }
 }
