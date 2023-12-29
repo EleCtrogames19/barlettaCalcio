@@ -1,3 +1,27 @@
-<p>
-  messaggiAdmin works!
-</p>
+<section class="messaggiAdmin">
+  <section class="mt-5 flex justify-content-center">
+    <p-paginator
+      [style]="{ width: 'max-content' }"
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="10"
+      [currentPageReportTemplate]="'{currentPage} su {totalPages}'"
+      [showCurrentPageReport]="true"
+      [totalRecords]="totalRecords"
+    ></p-paginator>
+  </section>
+    <!-- [ngClass]="
+      messaggio.nome === 'admin' ? 'align-items-end' : 'align-items-start'
+    " -->
+  <section
+    class="pt-8 px-3"
+    *ngFor="let messaggio of messaggi; index as index"
+  >
+    <app-messaggio
+       [messaggiApprovare]="messaggio"
+       [indiceMessaggio]="index"
+      (invioNuovaNews)="nuovaNewsService($event)"
+      (cancellaMessaggio)="cancellaMessaggio($event)"
+    ></app-messaggio>
+  </section>
+</section>

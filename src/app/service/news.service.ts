@@ -10,11 +10,9 @@ export class newsService {
   constructor(private http: HttpClient) {}
 
   getStagioni(): Observable<string[]> {
-    console.log('invio');
     return this.http.get<string[]>('http://localhost/database/queryNews.php?stagioni=true').pipe(map((res: any[]): any[] => res));
   }
   getNews(): Observable<any[]> {
-    console.log('invio');
     return this.http.get<any[]>('http://localhost/database/queryNews.php').pipe(map((res) => res));
   }
   getNewById(id: number): Observable<any> {

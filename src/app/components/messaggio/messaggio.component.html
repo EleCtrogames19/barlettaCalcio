@@ -1,7 +1,11 @@
-<article class="messaggioContainer">
+<article
+  class="messaggioContainer"
+  [ngClass]="messaggiApprovare !== undefined ? '' : 'container'"
+>
   <section class="card">
     <section class="intestazione">
-      <p>Scrivi Messaggio</p>
+      <p *ngIf="!messaggiApprovare">Scrivi Messaggio</p>
+      <p *ngIf="messaggiApprovare" class="titolo">{{ nome }}</p>
       <img
         class="logo"
         src="../../../assets/guestbook/logoMessaggio.png"
@@ -14,14 +18,26 @@
           *ngFor="let item of elementiMessaggio"
           class="elementiMessaggio mt-3"
         >
-          <label [for]="item.label">{{ item.label }}</label>
+          <label
+            [for]="item.label"
+            *ngIf="
+              (!messaggiApprovare && item.label !== 'Data') ||
+              (messaggiApprovare && item.label !== 'Nome*')
+            "
+            >{{ item.label }}</label
+          >
           <input
+            *ngIf="
+              (!messaggiApprovare && item.label !== 'Data') ||
+              (messaggiApprovare && item.label !== 'Nome*')
+            "
             type="text"
             pInputText
             [(ngModel)]="item.valore"
             [placeholder]="item.placeholder"
             [id]="item.label"
             [title]="item.label"
+            [disabled]="item.disabilita"
           />
         </article>
       </section>
@@ -87,6 +103,7 @@
           class="elementiMessaggio mt-3 mb-3"
         >
           <label [for]="item.label">{{ item.label }}</label>
+
           <input
             type="text"
             pInputText
@@ -96,13 +113,21 @@
             [title]="item.label"
           />
         </section>
-        <p-button
-          [disabled]="disabilitaStep1"
-          (onClick)="cambioStep()"
-          class="w-max"
-          [styleClass]="disabilitaStep1 ? 'buttonDisabilita' : 'button2'"
-          label="Step 2"
-        ></p-button>
+        <section class="flex gap-5">
+          <p-button
+            (click)="annullaNews()"
+            class="mt-3 w-max"
+            styleClass="button"
+            label="Annulla"
+          ></p-button>
+          <p-button
+            [disabled]="disabilitaStep1"
+            (onClick)="cambioStep()"
+            class="mt-3 w-max"
+            [styleClass]="disabilitaStep1 ? 'buttonDisabilita' : 'button2'"
+            label="Step 2"
+          ></p-button>
+        </section>
       </section>
       <section class="containerElementiMessaggio" *ngIf="step2">
         <article class="elementiMessaggio">

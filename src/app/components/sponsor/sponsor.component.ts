@@ -17,7 +17,6 @@ export class SponsorComponent implements OnInit, OnDestroy {
     this.subscrition= this.sponsorArray?.subscribe(
       items => this.array = items
     );
-    console.log(this.array)
   }
   ngOnDestroy(): void {
     this.subscrition?.unsubscribe();

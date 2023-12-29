@@ -48,7 +48,6 @@ export class GuestbookComponent implements OnInit {
         residenza: '',
         accettato: 'false',
       };
-      console.log(event);
       event.datiUtente.forEach((elemento: datiUtente): void => {
         switch (elemento.label) {
           case 'Nome*':
@@ -84,14 +83,13 @@ export class GuestbookComponent implements OnInit {
     this.attivaDialogoNuovaNews(false, undefined);
   }
   onPageChange(event: any): void {
-    console.log('evet', event);
     this.first = event.first;
     this.limitePagina = event.rows;
     this.rows = 9 + event.page * this.limitePagina;
     this.getMessaggi();
   }
 
-  getMessaggi() {
+  getMessaggi(): void {
     this.messaggioService.getMessaggio(this.first, this.rows, this.limitePagina).subscribe({
       next: (messaggi: messaggioUtente[]): void => {
         this.messaggi = [...messaggi];

@@ -32,14 +32,16 @@ export interface datiUtente {
   label: string;
   valore: string;
   placeholder: string;
+  disabilita: boolean;
 }
 
 export interface messaggioUtente {
-  id?: number;
+  idconferma_messaggi?: string;
+  idmessaggio?: string;
   nome: string;
   dataInserimento: string;
   messaggio: string;
-  nomeCitazione:string;
+  nomeCitazione: string;
   citazione: string;
   email: string;
   sito: string;

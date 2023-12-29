@@ -9,23 +9,19 @@ export const adminRoute: Routes = [
     children: [
       {
         path: 'foto',
-        component: AdminComponent,
+        loadChildren: () => import('./fotoAdmin/fotoAdmin.module').then((m) => m.FotoAdminModule),
       },
       {
         path: 'video',
-        component: AdminComponent,
+        loadChildren: () => import('./videoAdmin/videoAdmin.module').then((m) => m.VideoAdminModule),
       },
       {
         path: 'news',
         loadChildren: () => import('./newsAdmin/newsAdmin.module').then((m) => m.NewsAdminModule),
       },
       {
-        path: 'news/articolo/:titolo',
-        loadChildren: () => import('./../news/articolo/articolo.module').then((m) => m.ArticoloModule),
-      },
-      {
         path: 'messaggi',
-        component: AdminComponent,
+        loadChildren: () => import('./messaggiAdmin/messaggiAdmin.module').then((m) => m.MessaggiAdminModule),
       },
     ],
   },

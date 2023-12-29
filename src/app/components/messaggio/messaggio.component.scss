@@ -1,8 +1,7 @@
 .messaggioContainer {
+
   display: flex;
   justify-content: center;
-  position: absolute;
-  top: 160px;
   width: 100%;
 
   .card {
@@ -25,6 +24,12 @@
       background-size: cover;
       border-top-right-radius: 27px;
       border-top-left-radius: 27px;
+    }
+
+    .titolo {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .emoji-mart {
@@ -101,7 +106,10 @@
   }
 
   @media all and (max-width:560px) {
-    top:120px;
+    .container {
+      top: 120px;
+    }
+
     .card {
       width: 100%;
     }
@@ -115,3 +123,7 @@
     width: 57vw !important
   }
 }
+    .container {
+      position: absolute;
+      top: 160px;
+    }

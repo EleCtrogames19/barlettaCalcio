@@ -1,0 +1,14 @@
+.messaggiAdmin {
+  height: 100%;
+  width: calc(100vw - 202px);
+overflow: auto;
+  @media all and (max-width: 1000px) {
+    width: 100vw;
+  }
+
+  background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.407), rgba(87, 87, 87, 0.73)),
+  url('../../../../assets/sfondo/sfondo.jpg');
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}

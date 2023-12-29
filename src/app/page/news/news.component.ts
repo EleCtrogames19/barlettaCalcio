@@ -43,7 +43,6 @@ export class NewsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     let url: string[] = this.router.url.split('/');
     this.typePage = url[url.length - 1];
-    console.log(this.typePage);
     let tmp: string[] = [];
 
     this.sottoscrizioni.push(this.dimensioneSchermoService.width.subscribe((item) => (this.width = item)));
@@ -92,7 +91,6 @@ export class NewsComponent implements OnInit, OnDestroy {
             this.sottoscrizioni.push(
               this.archivioService.getFoto().subscribe({
                 next: (foto: Immagine[]): void => {
-                  console.log(foto);
                   this.images = [...foto];
                   this.cambioPaginaFoto = [...this.images];
                   this.images = [...this.images.slice(0, 11)];
@@ -142,7 +140,6 @@ export class NewsComponent implements OnInit, OnDestroy {
         this.sottoscrizioni.push(
           this.archivioService.getFotoByStagione(+spitStagione[0], +spitStagione[1]).subscribe({
             next: (foto: Immagine[]): void => {
-              console.log(foto);
               this.images = [...foto];
               this.cambioPaginaFoto = [...this.images];
               this.images = [...this.images.slice(0, 11)];
@@ -160,7 +157,6 @@ export class NewsComponent implements OnInit, OnDestroy {
         );
       }
     }
-    console.log('stagione', this.stagione);
     this.totalRecords = this.stagioni.length;
   }
   onPageChange(event: any): void {

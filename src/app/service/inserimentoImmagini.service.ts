@@ -11,7 +11,6 @@ export class InserimentoImmaginiService {
   postImmagine(immagine: File, percorsoCartelle:string): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('immagine', immagine);
-    console.log('formData',formData);
     return this.http
       .post<any>('http://localhost/database/insertCartellaFile.php?cartella=' + percorsoCartelle, formData,{observe:'response'})
       .pipe(map((res) => res));

@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private dimensioneSchermoService: DimensioneSchermoService, private router: Router, private loginService: LoginService, private location: Location) {}
   ngOnInit(): void {}
-  
+
   guest(): void {
     this.location.back();
   }
@@ -31,6 +31,5 @@ export class LoginComponent implements OnInit {
       },
       error: (errore: HttpErrorResponse): void => console.log('errore', errore),
     });
-    console.log('form', this.credenziali);
   }
 }

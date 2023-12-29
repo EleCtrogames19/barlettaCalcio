@@ -64,7 +64,6 @@ export class NewsAdminComponent implements OnInit, OnDestroy, AfterViewInit {
     document.getElementById('foto')?.getElementsByTagName('input')[0].setAttribute('name', 'foto');
     document.getElementById('foto')?.getElementsByTagName('input')[0].setAttribute('method', 'post');
     document.getElementById('foto')?.getElementsByTagName('input')[0].setAttribute('enctype', 'multipart/form-data');
-    console.log(document.getElementById('foto')?.getElementsByTagName('input')[0]);
   }
 
   aggiornaDisattiva(stringa: string): void {
@@ -156,7 +155,6 @@ export class NewsAdminComponent implements OnInit, OnDestroy, AfterViewInit {
         });
         this.elementiPath.forEach((elementi: { label: string; disattiva: boolean }): void => {
           if (elementi.label === tipoPath) {
-            console.log('tipoPath', tipoPath);
             elementi.disattiva = true;
           }
         });

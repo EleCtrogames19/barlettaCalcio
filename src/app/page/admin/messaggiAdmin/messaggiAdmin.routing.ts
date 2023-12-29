@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { MessaggioComponent } from '../../../components/messaggio/messaggio.component';
+import { MessaggiAdminComponent } from './messaggiAdmin.component';
 
 
 export const messaggiAdminRoute: Routes = [
   {
     path: '',
-    component: MessaggioComponent,
+    component: MessaggiAdminComponent,
   }
 ];
