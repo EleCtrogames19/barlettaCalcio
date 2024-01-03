@@ -65,7 +65,7 @@ export class NewsComponent implements OnInit, OnDestroy {
             this.newsArray = item;
             this.cambioPaginaNewsStagione = this.newsArray;
             this.newsArray.forEach((item) => {
-              item.descrizioneNews = item.descrizioneNews.length > 50 ? item.descrizioneNews.slice(0, 51) + '...' : item.descrizioneNews;
+              item.descrizioneNews = item.descrizioneNews.length > 50 ? item.descrizioneNews.slice(0, 45) + '...' : item.descrizioneNews;
               tmp.push(item.stagione);
             });
             this.newsArray = this.newsArray.slice(0, 11);
@@ -82,14 +82,17 @@ export class NewsComponent implements OnInit, OnDestroy {
           next: (stagioni: string[]): void => {
             tmp = stagioni;
             this.stagioni = [...new Set(tmp)];
-            this.stagioni.unshift('TUTTE');
+            this.stagione = this.stagioni[0];
           },
           error: (errore: HttpErrorResponse): void => {
             console.error(`errore: ${errore}`);
           },
           complete: (): void => {
+            console.log('stagione',this.stagione);
+            let spitStagione: string[] = this.stagione.split('-');
+            console.log('spitStagione', spitStagione);
             this.sottoscrizioni.push(
-              this.archivioService.getFoto().subscribe({
+              this.archivioService.getFotoByStagione(+spitStagione[0], +spitStagione[1]).subscribe({
                 next: (foto: Immagine[]): void => {
                   this.images = [...foto];
                   this.cambioPaginaFoto = [...this.images];
@@ -99,12 +102,11 @@ export class NewsComponent implements OnInit, OnDestroy {
               })
             );
             this.sottoscrizioni.push(
-              this.archivioService.getVideo().subscribe({
+              this.archivioService.getVideoByStagione(+spitStagione[0], +spitStagione[1]).subscribe({
                 next: (video: Video[]): void => {
                   this.video = [...video];
                   this.cambioPaginaVideo = [...this.video];
                   this.video = [...this.video.slice(0, 11)];
-                  this.totalRecords = this.cambioPaginaVideo.length;
                 },
               })
             );

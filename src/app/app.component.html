@@ -1,1 +1,22 @@
+<p-blockUI [blocked]="mostraSpinner" styleClass="bloccoUI"></p-blockUI>
+<p-progressSpinner
+  aria-label="Loading"
+  styleClass="spinner"
+  *ngIf="mostraSpinner"
+></p-progressSpinner>
+
 <router-outlet></router-outlet>
+
+<p-dialog [(visible)]="visible" [style]="{ width: '20vw' }" styleClass="dialog" [closable]="false">
+  <ng-template pTemplate="header">
+    <p>{{ header }}</p>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <p class="mt-4">{{ messaggio }}</p>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <section *ngFor="let item of button">
+    <p-button [label]="item" styleClass="button2" (onClick)="chiudi()"></p-button>
+  </section>
+  </ng-template>
+</p-dialog>

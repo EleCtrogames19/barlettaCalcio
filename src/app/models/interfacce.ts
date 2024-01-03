@@ -50,3 +50,10 @@ export interface messaggioUtente {
   residenza: string;
   accettato: string;
 }
+
+export interface elementiDialogo{
+  visible: boolean;
+  header: string;
+  messagge: string;
+  button: string[];
+ }

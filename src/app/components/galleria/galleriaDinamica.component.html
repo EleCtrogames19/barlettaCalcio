@@ -1,5 +1,8 @@
-<section class="galleryClassifica mx-1" [ngClass]="archivio?'flex justify-content-around':''" [ngStyle]="{'height':archivio?'calc(100vh - 167px)':''}">
-  <section [ngClass]="archivio?'w-5':''">
+<section
+  class="galleryClassifica mx-1 flex flex-column align-items-center"
+  [ngStyle]="{ height: archivio ? 'calc(100vh - 167px)' : '' }"
+>
+  <section [ngClass]="archivio ? 'w-7' : 'w6'">
     <article
       *ngIf="paginaAttuale !== 'news'"
       class="titleIframe text-flicker-in-glow"
@@ -25,7 +28,14 @@
           <img
             [src]="item.itemImageSrc"
             [ngClass]="paginaAttuale !== 'news' ? 'immagine' : ''"
-            [ngStyle]="{ height: fullscreen ? 'auto' : screenWidth>800?'300px':'245px' }"
+            [ngStyle]="{
+              height: !archivio || fullscreen
+                ? 'auto'
+                : screenWidth > 800
+                ? '300px'
+                : '245px',
+                width: !archivio ?'50%':''
+            }"
             [alt]="item.alt"
             aria-label="immagine"
           />
@@ -68,21 +78,39 @@
       </p-galleria>
     </article>
   </section>
-  <section [ngClass]="archivio?'w-5':''">
+  <section class="w-7 mt-6" *ngIf="video.length > 0 && archivio">
     <article
-      *ngIf="paginaAttuale !== 'news' && video.length > 0 && archivio"
+      *ngIf="paginaAttuale !== 'news'"
       class="titleIframe text-flicker-in-glow"
     >
       SEZIONE VIDEO
     </article>
-    <article *ngFor="let item of video" class="container-video">
-      <video controls height="350">
-        <source [src]="item.itemVideoSrc" class="immagine" [type]="item.type" />
-        Your browser does not support the video tag.
-      </video>
-    </article>
-    <article *ngIf="!archivio && screenWidth>1000" >
-<app-sponsor [sponsorArray]="sponsorArray1"></app-sponsor>
+    <section *ngFor="let item of newVideo">
+      <article class="container-video">
+        <video controls height="350">
+          <source
+            [src]="item.itemVideoSrc"
+            class="immagine"
+            [type]="item.type"
+          />
+          Your browser does not support the video tag.
+        </video>
+      </article>
+    </section>
+    <section class="mt-5 flex justify-content-center">
+      <p-paginator
+        [style]="{ width: 'max-content' }"
+        (onPageChange)="onPageChange($event)"
+        [first]="first"
+        [rows]="rows"
+        [alwaysShow]="true"
+        [totalRecords]="this.video.length"
+      ></p-paginator>
+    </section>
+  </section>
+  <section>
+    <article *ngIf="!archivio && screenWidth > 1000">
+      <app-sponsor [sponsorArray]="sponsorArray1"></app-sponsor>
     </article>
   </section>
 </section>

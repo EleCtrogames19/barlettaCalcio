@@ -7,6 +7,7 @@
       [(ngModel)]="stagione"
       inputId="stagione"
       (onChange)="cambioStagione()"
+      [autoDisplayFirst]="true"
     ></p-dropdown>
   </section>
 
@@ -25,11 +26,12 @@
         aria-label="immagine"
         class="immagini"
       />
+      <section class="px-1">
       <p class="dataNews">
-        ufficio stampa supporters web site del: {{ item.data }}
+        ufficio stampa del: {{ item.data }}
       </p>
       <p class="titoloNews">{{ item.titoloNews }}</p>
-      <p class="descrizioneNews mb-5">{{ item.descrizioneNews }}</p>
+      <p class="descrizioneNews mb-5">{{ item.descrizioneNews }}</p></section>
     </article>
   </section>
 
@@ -39,6 +41,7 @@
         [images]="images"
         [paginaAttuale]="typePage"
         [video]="video"
+        [archivio]="true"
       ></app-galleria-dinamica>
     </section>
   </section>

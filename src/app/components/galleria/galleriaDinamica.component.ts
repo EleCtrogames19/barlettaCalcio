@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectorRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Immagine, Sponsor, Video } from '../../models/interfacce';
 import { Galleria } from 'primeng/galleria';
 import { AutoFocus } from 'primeng/autofocus';
@@ -10,7 +10,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   templateUrl: './galleriaDinamica.component.html',
   styleUrls: ['./galleriaDinamica.component.scss'],
 })
-export class GalleriaDinamicaComponent implements OnInit, OnDestroy {
+export class GalleriaDinamicaComponent implements OnInit, OnDestroy, OnChanges {
   @Input() images: Immagine[] = [];
   @Input() video: Video[] = [];
   @Input() paginaAttuale: string = '';
@@ -26,6 +26,10 @@ export class GalleriaDinamicaComponent implements OnInit, OnDestroy {
 
   sottoscrizioni: Subscription[] = [];
   screenWidth: number = 0;
+  first: number = 0;
+  rows: number = 1;
+  page: number = 1;
+  newVideo: Video[] = [];
 
   @ViewChild('galleria') galleria: Galleria | undefined;
 
@@ -59,6 +63,13 @@ export class GalleriaDinamicaComponent implements OnInit, OnDestroy {
   }
   onThumbnailButtonClick() {
     this.showThumbnails = !this.showThumbnails;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['video'] && changes['video'].currentValue !== undefined) {
+      this.video = changes['video'].currentValue;
+      this.newVideo = [this.video[0]];
+    }
   }
 
   toggleFullScreen(): void {
@@ -119,6 +130,11 @@ export class GalleriaDinamicaComponent implements OnInit, OnDestroy {
     document.removeEventListener('webkitfullscreenchange', this.onFullScreenListener);
     document.removeEventListener('msfullscreenchange', this.onFullScreenListener);
     this.onFullScreenListener = null;
+  }
+
+  onPageChange(event: any): void {
+    this.first = event.first;
+    this.newVideo = [this.video[this.first]];
   }
 
   ngOnDestroy() {

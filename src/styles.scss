@@ -374,6 +374,7 @@ input.p-inputtext:enabled:focus {
 input.p-inputtext:enabled:hover {
   border-color: #ced4da;
 }
+
 textarea.p-inputtext:enabled:focus {
   box-shadow: none;
   border-color: #ced4da;
@@ -381,4 +382,34 @@ textarea.p-inputtext:enabled:focus {
 
 textarea.p-inputtext:enabled:hover {
   border-color: #ced4da;
+}
+
+.bloccoUI.p-blockui {
+  z-index: 1;
+}
+
+.spinner.p-progress-spinner {
+  position: absolute;
+  top: calc(50% - 100px);
+  left: calc(50% - 100px);
+  z-index: 2;
+  width: 200px;
+  height: 200px;
+}
+
+.dialog.p-dialog{
+  border-top-right-radius: 27px;
+    border-top-left-radius: 27px;
+}
+.dialog.p-dialog .p-dialog-header {
+  padding-left: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 30px;
+  background-image: url("assets/sfondo/bannerini.png");
+  background-size: cover;
+  border-top-right-radius: 27px;
+  border-top-left-radius: 27px;
 }
