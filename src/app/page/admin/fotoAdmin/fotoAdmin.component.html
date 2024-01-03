@@ -1,3 +1,99 @@
-<section class="fotoAdmin">
-  prova
+<section class="fotoVideoAdmin">
+  <section class="card">
+    <p class="titolo mt-5">{{ video ? "VIDEO" : "FOTO" }}</p>
+    <section
+      class="flex justify-content-center w-full gap-3"
+      *ngIf="immagini?.length === 2"
+    >
+      <img
+        [src]="anteprimaImmagine.url"
+        [alt]="anteprimaImmagine.alt"
+        aria-label="immagine"
+        class="immagini"
+        height="50%"
+        width="50%"
+      />
+      <p-button
+        icon="pi pi-trash"
+        styleClass="button2"
+        (onClick)="pulisciImmagini()"
+      ></p-button>
+    </section>
+    <section class="content">
+      <section
+        class="flex flex-wrap gap-3"
+        [ngClass]="
+          screenWidth > 1000
+            ? 'justify-content-between'
+            : 'justify-content-center'
+        "
+        *ngIf="immagini?.length !== 2"
+      >
+        <section *ngFor="let item of video?elementiPath2:elementiPath1">
+          <p-fileUpload
+            [disabled]="attivaUpload || item.disattiva"
+            mode="basic"
+            name="foto[]"
+            id="foto"
+            [accept]="video?'.mp4':'.jpg, .jpeg, .png'"
+            [multiple]="false"
+            (uploadHandler)="uploadHandler($event, item.label)"
+            [auto]="true"
+            [chooseLabel]="item.label | titlecase"
+            [customUpload]="true"
+            [fileLimit]="2"
+            [invalidFileLimitMessageSummary]="
+              'Devi caricare massimo due file, foto e anteprima'
+            "
+            pTooltip="Per sbloccare l'upload devi inserire la stagione"
+            styleClass="buttonUpload"
+          ></p-fileUpload>
+        </section>
+      </section>
+      <section
+        class="contentInput"
+        [ngClass]="
+          screenWidth > 600 ? 'flex flex-wrap justify-content-between' : ''
+        "
+      >
+        <section
+          *ngFor="let item of video?elementiInput2:elementiInput1; index as index"
+          class="mt-3"
+          [ngClass]="
+            screenWidth > 1000
+              ? 'w-5'
+              : screenWidth > 600
+              ? 'flex justify-content-center'
+              : 'w-full'
+          "
+        >
+          <span
+            class="p-float-label mt-3 uppercase"
+            *ngIf="item.label !== 'descrizione'"
+          >
+            <input
+              class="input w-full"
+              pInputText
+              [id]="item.label"
+              [(ngModel)]="item.valore"
+              (ngModelChange)="aggiornaDisattiva(item.label)"
+            />
+            <label htmlFor="item.label" class="label">{{ item.label }}</label>
+          </span>
+        </section>
+      </section>
+      <section
+        class="mt-3 contentButton"
+        [ngClass]="screenWidth > 600 ? 'flex justify-content-end' : ''"
+        [ngStyle]="{ 'margin-bottom': screenWidth > 600 ? '16px' : '' }"
+      >
+        <p-button
+          label="Salva"
+          [styleClass]="'button2'"
+          (onClick)="salva()"
+          [disabled]="disattivaSalva"
+        ></p-button>
+      </section>
+    </section>
+  </section>
 </section>

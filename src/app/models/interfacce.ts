@@ -1,14 +1,16 @@
 export interface Immagine {
-  id: string;
+  id?: string;
   itemImageSrc: string;
   thumbnailImageSrc: string;
   alt: string;
+  stagione?:string;
   title: string;
 }
 export interface Video {
-  id: string;
+  id?: string;
   itemVideoSrc: string;
   type: string;
+  stagione?: string;
 }
 
 export interface Sponsor {

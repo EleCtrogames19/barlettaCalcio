@@ -144,7 +144,7 @@ export class NewsAdminComponent implements OnInit, OnDestroy, AfterViewInit {
 
   uploadHandler(event: { files: File[] }, tipoPath: string): void {
     let url = `assets/news/${this.stagione}/${event.files[0].name}`;
-    this.inserimentoImmaginiService.postImmagine(event.files[0], `news/${this.stagione}`).subscribe({
+    this.inserimentoImmaginiService.postImmagineVideo(event.files[0], `news/${this.stagione}`,false).subscribe({
       next: (): void => {
         this.immagini.push(event.files[0]);
         this.elementiInput1.forEach((elementi: { label: string; valore: string }): void => {

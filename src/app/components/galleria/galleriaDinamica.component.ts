@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectorRef, Input } from '@angular/core';
-import { Immagine, Video } from '../../models/interfacce';
+import { Immagine, Sponsor, Video } from '../../models/interfacce';
 import { Galleria } from 'primeng/galleria';
+import { AutoFocus } from 'primeng/autofocus';
+import { DimensioneSchermoService } from '../../service/dimensioneSchermo.service';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-galleria-dinamica',
@@ -9,8 +12,9 @@ import { Galleria } from 'primeng/galleria';
 })
 export class GalleriaDinamicaComponent implements OnInit, OnDestroy {
   @Input() images: Immagine[] = [];
-  @Input() video: Video[]=[]
+  @Input() video: Video[] = [];
   @Input() paginaAttuale: string = '';
+  @Input() archivio: boolean = false;
 
   showThumbnails: boolean = false;
 
@@ -19,6 +23,9 @@ export class GalleriaDinamicaComponent implements OnInit, OnDestroy {
   activeIndex: number = 0;
 
   onFullScreenListener: any;
+
+  sottoscrizioni: Subscription[] = [];
+  screenWidth: number = 0;
 
   @ViewChild('galleria') galleria: Galleria | undefined;
 
@@ -36,16 +43,25 @@ export class GalleriaDinamicaComponent implements OnInit, OnDestroy {
       numVisible: 1,
     },
   ];
-  constructor(private cd: ChangeDetectorRef) {}
+  sponsorArray1: BehaviorSubject<Sponsor[]> = new BehaviorSubject<Sponsor[]>([]);
+
+  constructor(private cd: ChangeDetectorRef, private dimensioneSchermoService: DimensioneSchermoService) {
+    this.sottoscrizioni.push(this.dimensioneSchermoService.width.subscribe((item) => (this.screenWidth = item)));
+  }
 
   ngOnInit() {
+    this.sponsorArray1.next([
+      {
+        src: 'assets/sponsor/cobbler.jpg',
+      },
+    ]);
     this.bindDocumentListeners();
   }
   onThumbnailButtonClick() {
     this.showThumbnails = !this.showThumbnails;
   }
 
-  toggleFullScreen() {
+  toggleFullScreen(): void {
     if (this.fullscreen) {
       this.closePreviewFullScreen();
     } else {
@@ -107,6 +123,7 @@ export class GalleriaDinamicaComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.unbindDocumentListeners();
+    this.sottoscrizioni.forEach((item) => item.unsubscribe());
   }
 
   galleriaClass() {

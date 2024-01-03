@@ -3,6 +3,7 @@
   display: block;
 }
 
+
 .thumbnail {
   display: block;
 }
@@ -42,10 +43,12 @@
     .p-galleria-thumbnail-items-container {
       width: 100%;
     }
-
-    .p-galleria-item {
-      background: black;
-    }
+            .p-galleria-item-container {
+              .p-galleria-item {
+               // height:300px;
+                background: black;
+              }
+            }
 
     .custom-galleria-footer {
       display: flex;

@@ -11,6 +11,7 @@ export class NavbarComponent implements OnInit {
   width: number = 0;
   sidebarVisible: boolean = false;
   loggato: boolean = false;
+  sezioneAdmin:boolean = false;
 
   constructor(private dimensioneSchermoService: DimensioneSchermoService, private router: Router) {}
 
@@ -19,7 +20,8 @@ export class NavbarComponent implements OnInit {
     this.dimensioneSchermoService.isLoggato.subscribe((loggato: boolean): boolean => (this.loggato = loggato));
     setInterval(() => {
        this.dimensioneSchermoService.isLoggato.next(sessionStorage.getItem('a') === 'barlettaCalcio');
-     }, 1000);
+    }, 1000);
+    this.sezioneAdmin = this.router.url.includes('amministratore');
   }
   login(): void {
     if (this.loggato) {

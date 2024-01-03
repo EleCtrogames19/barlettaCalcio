@@ -10,10 +10,16 @@ export const adminRoute: Routes = [
       {
         path: 'foto',
         loadChildren: () => import('./fotoAdmin/fotoAdmin.module').then((m) => m.FotoAdminModule),
+        data: {
+          video: false,
+        },
       },
       {
         path: 'video',
-        loadChildren: () => import('./videoAdmin/videoAdmin.module').then((m) => m.VideoAdminModule),
+        loadChildren: () => import('./fotoAdmin/fotoAdmin.module').then((m) => m.FotoAdminModule),
+        data: {
+          video: true,
+        },
       },
       {
         path: 'news',

@@ -1,70 +1,88 @@
-<section class="galleryClassifica mx-1">
-  <article *ngIf="paginaAttuale !== 'news'" class="titleIframe text-flicker-in-glow">SEZIONE FOTO</article>
-  <article>
-    <p-galleria
-      #galleria
-      [value]="images"
-      [(activeIndex)]="activeIndex"
-      [numVisible]="5"
-      [showThumbnails]="showThumbnails"
-      [showItemNavigators]="true"
-      [showItemNavigatorsOnHover]="true"
-      [circular]="true"
-      [autoPlay]="true"
-      [transitionInterval]="3000"
-      [containerStyle]="{ width: '100%' }"
-      [containerClass]="galleriaClass()"
+<section class="galleryClassifica mx-1" [ngClass]="archivio?'flex justify-content-around':''" [ngStyle]="{'height':archivio?'calc(100vh - 167px)':''}">
+  <section [ngClass]="archivio?'w-5':''">
+    <article
+      *ngIf="paginaAttuale !== 'news'"
+      class="titleIframe text-flicker-in-glow"
     >
-      <ng-template pTemplate="item" let-item>
-        <img
-          [src]="item.itemImageSrc"
-          [class]="paginaAttuale !== 'news' ? 'immagine' : ''"
-          [alt]="item.alt"
-          aria-label="immagine"
-        />
-        {{ item.itemVideoSrc }}
-      </ng-template>
-      <ng-template pTemplate="thumbnail" let-item>
-        <div class="grid grid-nogutter justify-content-center">
+      SEZIONE FOTO
+    </article>
+    <article>
+      <p-galleria
+        #galleria
+        [value]="images"
+        [(activeIndex)]="activeIndex"
+        [numVisible]="5"
+        [showThumbnails]="showThumbnails"
+        [showItemNavigators]="true"
+        [showItemNavigatorsOnHover]="true"
+        [circular]="true"
+        [autoPlay]="true"
+        [transitionInterval]="3000"
+        [containerStyle]="{ width: '100%' }"
+        [containerClass]="galleriaClass()"
+      >
+        <ng-template pTemplate="item" let-item>
           <img
-            [src]="item.thumbnailImageSrc"
-            class="thumbnail"
+            [src]="item.itemImageSrc"
+            [ngClass]="paginaAttuale !== 'news' ? 'immagine' : ''"
+            [ngStyle]="{ height: fullscreen ? 'auto' : screenWidth>800?'300px':'245px' }"
             [alt]="item.alt"
             aria-label="immagine"
           />
-        </div>
-      </ng-template>
-      <ng-template pTemplate="footer" let-item>
-        <div class="custom-galleria-footer">
-          <button
-            type="button"
-            pButton
-            icon="pi pi-list"
-            (click)="onThumbnailButtonClick()"
-            aria-label="button anteprima piccola"
-          ></button>
-          <span *ngIf="images" class="title-container">
-            <span>{{ activeIndex + 1 }}/{{ images.length }}</span>
-            <span class="title">{{ images[activeIndex].title }}</span>
-            <span>{{ images[activeIndex].alt }}</span>
-          </span>
-          <button
-            type="button"
-            pButton
-            [icon]="'pi pi-window-minimize'"
-            (click)="toggleFullScreen()"
-            class="fullscreen-button"
-            aria-label="button fullScreen"
-          ></button>
-        </div>
-      </ng-template>
-    </p-galleria>
-  </article>
-  <article  *ngIf="paginaAttuale !== 'news' && video.length >0 " class="titleIframe text-flicker-in-glow mt-7">SEZIONE VIDEO</article>
-  <article *ngFor="let item of video" class="container-video">
-    <video controls>
-      <source [src]="item.itemVideoSrc" class="immagine" [type]="item.type" />
-      Your browser does not support the video tag.
-    </video>
-  </article>
+          {{ item.itemVideoSrc }}
+        </ng-template>
+        <ng-template pTemplate="thumbnail" let-item>
+          <div class="grid grid-nogutter justify-content-center">
+            <img
+              [src]="item.thumbnailImageSrc"
+              class="thumbnail"
+              [alt]="item.alt"
+              aria-label="immagine"
+            />
+          </div>
+        </ng-template>
+        <ng-template pTemplate="footer" let-item>
+          <div class="custom-galleria-footer">
+            <button
+              type="button"
+              pButton
+              icon="pi pi-list"
+              (click)="onThumbnailButtonClick()"
+              aria-label="button anteprima piccola"
+            ></button>
+            <span *ngIf="images" class="title-container">
+              <span>{{ activeIndex + 1 }}/{{ images.length }}</span>
+              <span class="title">{{ images[activeIndex].title }}</span>
+              <span>{{ images[activeIndex].alt }}</span>
+            </span>
+            <button
+              type="button"
+              pButton
+              [icon]="'pi pi-window-minimize'"
+              (click)="toggleFullScreen()"
+              class="fullscreen-button"
+              aria-label="button fullScreen"
+            ></button>
+          </div>
+        </ng-template>
+      </p-galleria>
+    </article>
+  </section>
+  <section [ngClass]="archivio?'w-5':''">
+    <article
+      *ngIf="paginaAttuale !== 'news' && video.length > 0 && archivio"
+      class="titleIframe text-flicker-in-glow"
+    >
+      SEZIONE VIDEO
+    </article>
+    <article *ngFor="let item of video" class="container-video">
+      <video controls height="350">
+        <source [src]="item.itemVideoSrc" class="immagine" [type]="item.type" />
+        Your browser does not support the video tag.
+      </video>
+    </article>
+    <article *ngIf="!archivio && screenWidth>1000" >
+<app-sponsor [sponsorArray]="sponsorArray1"></app-sponsor>
+    </article>
+  </section>
 </section>

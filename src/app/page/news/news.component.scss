@@ -4,6 +4,7 @@
   background-size: cover;
   background-attachment: fixed;
   overflow: auto;
+  height: 100vh;
 
   .card {
     background-color: white;
@@ -38,6 +39,7 @@
     }
   }
 }
+
 .container {
   display: grid;
   grid-template-columns: 100% 0%;
@@ -69,6 +71,7 @@
 
     .p-galleria-content {
       position: relative;
+
     }
 
     .p-galleria-thumbnail-wrapper {

@@ -7,6 +7,13 @@
     <h3><a [routerLink]="['/archivio']" routerLinkActive="router-link-active">Archivio</a></h3>
     <h3><a [routerLink]="['/guestbook']" routerLinkActive="router-link-active">GuestBook</a></h3>
     <h3><a [routerLink]="['/contatti']" routerLinkActive="router-link-active">Contatti</a></h3>
+     <section *ngIf="loggato && !sezioneAdmin" class="flex gap-7">
+       <h3><a [routerLink]="['/amministratore/foto']" routerLinkActive="router-link-active" (click)="sidebarVisible = false" >New Foto</a></h3>
+       <h3><a [routerLink]="['/amministratore/video']" routerLinkActive="router-link-active" (click)="sidebarVisible = false" >New Video</a></h3>
+       <h3><a [routerLink]="['/amministratore/news']" routerLinkActive="router-link-active" (click)="sidebarVisible = false" >New News</a></h3>
+       <h3><a [routerLink]="['/amministratore/messaggi']" routerLinkActive="router-link-active" (click)="sidebarVisible = false" >Approvazione Messaggi</a></h3>
+
+    </section>
   </ul>
 </article>
   <article class="mt-2">
@@ -17,17 +24,17 @@
 <section *ngIf="width<=1000" style="background-color: black;">
       <p-button [style]="{'color':'white','background':'black' }" (click)="sidebarVisible = true" icon="pi pi-bars"styleClass="button" aria-label="menu"></p-button>
   <p-sidebar [(visible)]="sidebarVisible" position="left" styleClass="sidebar">
-    <h3><a [routerLink]="['/homepage']" routerLinkActive="router-link-active" >home</a></h3>
-    <h3><a [routerLink]="['/news']" routerLinkActive="router-link-active">News</a></h3>
-    <h3><a [routerLink]="['/archivio']" routerLinkActive="router-link-active">Archivio</a></h3>
-    <h3><a [routerLink]="['/guestbook']" routerLinkActive="router-link-active">GuestBook</a></h3>
-    <h3><a [routerLink]="['/contatti']" routerLinkActive="router-link-active">Contatti</a></h3>
-    <h3 *ngIf="!loggato"><a [routerLink]="['/login']" routerLinkActive="router-link-active">Login</a></h3>
+    <h3><a [routerLink]="['/homepage']" routerLinkActive="router-link-active" (click)="sidebarVisible = false" >home</a></h3>
+    <h3><a [routerLink]="['/news']" routerLinkActive="router-link-active" (click)="sidebarVisible = false" >News</a></h3>
+    <h3><a [routerLink]="['/archivio']" routerLinkActive="router-link-active" (click)="sidebarVisible = false" >Archivio</a></h3>
+    <h3><a [routerLink]="['/guestbook']" routerLinkActive="router-link-active" (click)="sidebarVisible = false" >GuestBook</a></h3>
+    <h3><a [routerLink]="['/contatti']" routerLinkActive="router-link-active" (click)="sidebarVisible = false" >Contatti</a></h3>
+    <h3 *ngIf="!loggato"><a [routerLink]="['/login']" routerLinkActive="router-link-active" (click)="sidebarVisible = false" >Login</a></h3>
     <section *ngIf="loggato" class="display">
-       <h3><a [routerLink]="['foto']" routerLinkActive="router-link-active">New Foto</a></h3>
-       <h3><a [routerLink]="['video']" routerLinkActive="router-link-active">New Video</a></h3>
-       <h3><a [routerLink]="['news']" routerLinkActive="router-link-active">New News</a></h3>
-       <h3><a [routerLink]="['messaggi']" routerLinkActive="router-link-active">Approvazione Messaggi</a></h3>
+       <h3><a [routerLink]="['/amministratore/foto']" routerLinkActive="router-link-active" (click)="sidebarVisible = false" >New Foto</a></h3>
+       <h3><a [routerLink]="['/amministratore/video']" routerLinkActive="router-link-active" (click)="sidebarVisible = false" >New Video</a></h3>
+       <h3><a [routerLink]="['/amministratore/news']" routerLinkActive="router-link-active" (click)="sidebarVisible = false" >New News</a></h3>
+       <h3><a [routerLink]="['/amministratore/messaggi']" routerLinkActive="router-link-active" (click)="sidebarVisible = false" >Approvazione Messaggi</a></h3>
 
     </section>
 </p-sidebar>
