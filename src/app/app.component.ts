@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
   title = 'barletta calcio';
   screenWidth: number = 0;
   screenHeight: number = 0;
-  loading$: Observable<boolean> = this.dimensioneSchermo.loading$;
   mostraSpinner: boolean = false;
   visible: boolean = true;
   elementiDialog: BehaviorSubject<elementiDialogo>|undefined;
@@ -31,8 +30,9 @@ export class AppComponent implements OnInit {
 
   constructor(private dimensioneSchermo: DimensioneSchermoService, private primengConfig: PrimeNGConfig) {
     this.getScreenSize();
-    this.dimensioneSchermo.loading$.subscribe((spinner: boolean): void => {
-      this.mostraSpinner = spinner;
+    this.dimensioneSchermo._loading.subscribe((spinner: boolean): void => {
+      setTimeout(() => { console.log('login', spinner); this.mostraSpinner = spinner;},1000)
+
     });
     this.dimensioneSchermo.elementiDialogo.subscribe((elementi: elementiDialogo) => {
       this.visible = elementi.visible;

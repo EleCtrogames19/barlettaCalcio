@@ -1,5 +1,5 @@
-    <section class=" sponsor">
+    <section [ngClass]="class==='galleria'?'':'sponsor'">
       <article *ngFor="let item of array">
-      <img [src]="item.src" width="100%" height="350px" alt="sponsor" />
+      <img [src]="item.src" class='immagine' alt="sponsor" />
     </article>
     </section>

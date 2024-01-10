@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectorRef, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectorRef, Input, } from '@angular/core';
 import { Immagine, Sponsor, Video } from '../../models/interfacce';
 import { Galleria } from 'primeng/galleria';
 import { AutoFocus } from 'primeng/autofocus';
@@ -10,9 +10,10 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   templateUrl: './galleriaDinamica.component.html',
   styleUrls: ['./galleriaDinamica.component.scss'],
 })
-export class GalleriaDinamicaComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() images: Immagine[] = [];
-  @Input() video: Video[] = [];
+export class GalleriaDinamicaComponent implements OnInit, OnDestroy {
+  @Input() elementi: BehaviorSubject<{ foto: any; video: any }> = new BehaviorSubject<{ foto: any; video: any }>({ foto: [], video: [] });
+  images: Immagine[] = [];
+  video: Video[] = [];
   @Input() paginaAttuale: string = '';
   @Input() archivio: boolean = false;
 
@@ -51,9 +52,20 @@ export class GalleriaDinamicaComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(private cd: ChangeDetectorRef, private dimensioneSchermoService: DimensioneSchermoService) {
     this.sottoscrizioni.push(this.dimensioneSchermoService.width.subscribe((item) => (this.screenWidth = item)));
+
   }
 
   ngOnInit() {
+      this.sottoscrizioni.push(
+        this.elementi.subscribe({
+          next: (elementi) => {
+            console.log(elementi, 'elementi');
+            this.images = elementi.foto;
+            this.video = elementi.video;
+            this.newVideo = [this.video[0]];
+          },
+        })
+      );
     this.sponsorArray1.next([
       {
         src: 'assets/sponsor/cobbler.jpg',
@@ -63,13 +75,6 @@ export class GalleriaDinamicaComponent implements OnInit, OnDestroy, OnChanges {
   }
   onThumbnailButtonClick() {
     this.showThumbnails = !this.showThumbnails;
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['video'] && changes['video'].currentValue !== undefined) {
-      this.video = changes['video'].currentValue;
-      this.newVideo = [this.video[0]];
-    }
   }
 
   toggleFullScreen(): void {
@@ -134,6 +139,7 @@ export class GalleriaDinamicaComponent implements OnInit, OnDestroy, OnChanges {
 
   onPageChange(event: any): void {
     this.first = event.first;
+    console.log(this.video, this.first)
     this.newVideo = [this.video[this.first]];
   }
 

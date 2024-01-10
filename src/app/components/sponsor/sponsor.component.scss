@@ -4,6 +4,18 @@ flex-direction: column;
 gap: 0.5rem;
 @media all and (min-width:600px) and (max-width:1601px) {
     display: grid;
-    grid-template-columns: 6fr 6fr;
+    grid-template-columns: 4fr 4fr 4fr;
+  }
+}
+.immagine{
+  height:350px;
+  width: 100%;
+  @media all and (min-width:600px) and (max-width:1601px) {
+  height: 250px;
+    width: 100%;
+  }
+  @media all and (max-width:599px) {
+  height: 150px;
+    width: 100%;
   }
 }

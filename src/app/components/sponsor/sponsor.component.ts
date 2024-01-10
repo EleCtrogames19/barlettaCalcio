@@ -9,6 +9,7 @@ import { BehaviorSubject, Subscription } from 'rxjs'
 })
 export class SponsorComponent implements OnInit, OnDestroy {
   @Input() sponsorArray: BehaviorSubject<Sponsor[]> | undefined;
+  @Input() class: string='';
   array: Sponsor[] = [];
   subscrition: Subscription | undefined;
   constructor() {}

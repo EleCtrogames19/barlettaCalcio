@@ -49,9 +49,9 @@ export class FotoAdminComponent implements OnInit, OnDestroy, AfterViewInit {
   aggiornaDisattiva(stringa: string): void {
     if (this.video) {
       if (stringa === 'stagione') {
-        this.elementiPath2.forEach((elementi: { label: string; disattiva: boolean; }): boolean => (elementi.disattiva = false));
+        this.elementiPath2.forEach((elementi: { label: string; disattiva: boolean }): boolean => (elementi.disattiva = false));
       }
-       } else {
+    } else {
       if (stringa === 'stagione') {
         this.elementiPath1.forEach((elementi: { label: string; disattiva: boolean }): boolean => (elementi.disattiva = false));
       }
@@ -60,13 +60,13 @@ export class FotoAdminComponent implements OnInit, OnDestroy, AfterViewInit {
   get disattivaSalva(): boolean {
     let disattiva: boolean = false;
     if (this.video) {
-    this.elementiInput2.forEach((elementi: { label: string; valore: string }): void => {
-      if (elementi.valore === '') {
-        disattiva = true;
-      }
-    });
+      this.elementiInput2.forEach((elementi: { label: string; valore: string }): void => {
+        if (elementi.valore === '') {
+          disattiva = true;
+        }
+      });
     } else {
-      this.elementiInput1.forEach((elementi: { label: string; valore: string; }): void => {
+      this.elementiInput1.forEach((elementi: { label: string; valore: string }): void => {
         if (elementi.valore === '') {
           disattiva = true;
         }
@@ -99,9 +99,9 @@ export class FotoAdminComponent implements OnInit, OnDestroy, AfterViewInit {
       : true;
   }
   uploadHandler(event: { files: File[] }, tipoPath: string): void {
-    console.log(event)
+    console.log(event);
     let url = `assets/galleria/${this.stagione}/${event.files[0].name}`;
-    this.inserimentoImmaginiService.postImmagineVideo(event.files[0], `galleria/${this.stagione}`,this.video).subscribe({
+    this.inserimentoImmaginiService.postImmagineVideo(event.files[0], `galleria/${this.stagione}`, this.video).subscribe({
       next: (): void => {
         this.immagini.push(event.files[0]);
         this.elementiInput1.forEach((elementi: { label: string; valore: string }): void => {
@@ -131,8 +131,8 @@ export class FotoAdminComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       },
       error: (errore): void => {
-        console.log('errore', errore)
-        location.reload();
+        console.log('errore', errore);
+        this.pulisciImmagini();
       },
     });
   }
@@ -140,6 +140,9 @@ export class FotoAdminComponent implements OnInit, OnDestroy, AfterViewInit {
   pulisciImmagini(): void {
     this.immagini = [];
     this.elementiInput1.forEach((elementi: { label: string; valore: string }): void => {
+      elementi.valore = '';
+    });
+    this.elementiInput2.forEach((elementi: { label: string; valore: string }): void => {
       elementi.valore = '';
     });
   }
@@ -178,7 +181,15 @@ export class FotoAdminComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       });
       this.archivioService.postFoto(foto).subscribe({
-        next: () => {},
+        next: () => {
+          this.dimensioneSchermo.elementiDialogo.next({
+            visible: true,
+            header: 'Inserimento Foto',
+            messagge: 'Foto Inserita Correttamente',
+            button: ['OK'],
+          });
+          this.pulisciImmagini();
+        },
         error: () => {},
       });
     } else {
@@ -187,7 +198,7 @@ export class FotoAdminComponent implements OnInit, OnDestroy, AfterViewInit {
         type: 'video/mp4',
         stagione: '',
       };
-      this.elementiInput2.forEach((elemento: { label: string; valore: string; }) => {
+      this.elementiInput2.forEach((elemento: { label: string; valore: string }) => {
         switch (elemento.label) {
           case 'video':
             video['itemVideoSrc'] = elemento.valore;
@@ -201,7 +212,15 @@ export class FotoAdminComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       });
       this.archivioService.postVideo(video).subscribe({
-        next: () => {},
+        next: () => {
+          this.dimensioneSchermo.elementiDialogo.next({
+            visible: true,
+            header: 'Inserimento Video',
+            messagge: 'Video Inserito Correttamente',
+            button: ['OK'],
+          });
+          this.pulisciImmagini();
+        },
         error: () => {},
       });
     }

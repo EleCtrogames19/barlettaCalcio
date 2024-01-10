@@ -19,9 +19,6 @@ export class NetworkInterceptor implements HttpInterceptor {
     this.dimensioneSchermoService.show();
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 401) {
-          this.router.navigateByUrl(`/login`);
-        }
         this.dimensioneSchermoService.elementiDialogo.next({
           visible: true,
           header: 'Errore Servizio',

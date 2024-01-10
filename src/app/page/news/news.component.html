@@ -36,11 +36,10 @@
   </section>
 
   <section *ngIf="typePage === 'archivio'">
-    <section>
+    <section *ngIf="abilitaGalleria">
       <app-galleria-dinamica
-        [images]="images"
+        [elementi]="elementi"
         [paginaAttuale]="typePage"
-        [video]="video"
         [archivio]="true"
       ></app-galleria-dinamica>
     </section>

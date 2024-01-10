@@ -10,8 +10,7 @@ export class DimensioneSchermoService {
   height: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   isLoggato: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  private _loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public readonly loading$: Observable<boolean> = this._loading.asObservable();
+  _loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   elementiDialogo: BehaviorSubject<elementiDialogo> = new BehaviorSubject<elementiDialogo>({
     visible: false,

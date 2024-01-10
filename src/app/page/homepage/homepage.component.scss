@@ -3,14 +3,17 @@ position: relative;
 top:-4px
 }
 .classifica-galleria-sponsor {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   .galleryClassifica {
     display: grid;
     grid-template-columns: 7fr 5fr;
-
-    @media all and (max-width: 1900px) {
+    gap:16px;
+    @media all and (max-width: 1000px) {
       display: flex;
       flex-direction: column;
-
+      gap
       .classifica {
         height: calc(820px + 5vw);
       }

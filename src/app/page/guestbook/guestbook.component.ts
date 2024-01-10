@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { datiUtente, messaggioUtente } from '../../models/interfacce';
 import { MessageService } from '../../service/messaggio.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DimensioneSchermoService } from '../../service/dimensioneSchermo.service';
 
 @Component({
   selector: 'app-guestbook',
@@ -17,7 +18,7 @@ export class GuestbookComponent implements OnInit {
   limitePagina: number = 10;
   totalRecords: number = 0;
 
-  constructor(private messaggioService: MessageService) {
+  constructor(private messaggioService: MessageService, private dimensioneSchermo:DimensioneSchermoService) {
     this.messaggioService.getTotaleRighe().subscribe({
       next: (totaleRighe: { totaleRighe: number }[]): void => {
         this.totalRecords = totaleRighe[0].totaleRighe;
@@ -75,6 +76,12 @@ export class GuestbookComponent implements OnInit {
       messaggio['nomeCitazione'] = event.citazione?.nomeCitazione || '';
       this.messaggioService.postMessaggio(messaggio).subscribe({
         next: (): void => {
+          this.dimensioneSchermo.elementiDialogo.next({
+            visible: true,
+            header: 'Inserimento Messaggio',
+            messagge: 'Messaggio Inserita Correttamente... attendere l\'approvazione dell\'amministratore',
+            button: ['OK'],
+          });
           this.getMessaggi();
         },
         error: (errore: HttpErrorResponse): void => console.log('errore', errore),

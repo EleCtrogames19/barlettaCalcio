@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DimensioneSchermoService } from '../../service/dimensioneSchermo.service';
 import { Subscription } from 'rxjs';
 import { newsArticolo } from '../../models/interfacce';
+import { Router } from '@angular/router';
+import { newsService } from '../../service/news.service';
 
 @Component({
   selector: 'app-pageIntro',
@@ -17,51 +19,22 @@ export class PageIntroComponent implements OnInit, OnDestroy {
   squadreM: string[] = [];
   subscription: Subscription[] = [];
 
-  constructor(private dimensioneSchermo: DimensioneSchermoService) {
+  constructor (
+    private dimensioneSchermo: DimensioneSchermoService,
+    private router: Router,
+    private newsService: newsService,
+  ) {
     this.subscription.push(this.dimensioneSchermo.width.subscribe((item) => (this.screenWidth = item)));
     this.subscription.push(this.dimensioneSchermo.height.subscribe((item) => (this.screenHeight = item)));
   }
 
   ngOnInit() {
     this.caricamentoSquadre();
-    this.newsArray = [
-      {
-        id: 0,
-        stagione: '2023-2024',
-        img: '../../../assets/intro/1111.jpg',
-        anteprima: '../../../assets/intro/1111.jpg',
-        alt: 'immagine barletta',
-        data: '12 gennaio 2023',
-        titoloNews: '18^ g.Barletta - Molfetta 1-1',
-        descrizioneNews: 'Finale al "Manzi-Chiapulin", 1-1 tra Barletta e Molfetta',
-        linkNews: true,
-        urllinkNews: '/',
-      },
-      {
-        id: 1,
-        stagione: '2023-2024',
-        img: '../../../assets/intro/1111.jpg',
-        anteprima: '../../../assets/intro/1111.jpg',
-        alt: 'immagine barletta',
-        data: '12 gennaio 2023',
-        titoloNews: '18^ g.Barletta - Molfetta 1-1',
-        descrizioneNews: 'Finale al "Manzi-Chiapulin", 1-1 tra Barletta e Molfetta',
-        linkNews: false,
-        urllinkNews: '/',
-      },
-      {
-        id: 2,
-        stagione: '2023-2024',
-        img: '../../../assets/intro/1111.jpg',
-        anteprima: '../../../assets/intro/1111.jpg',
-        alt: 'immagine barletta',
-        data: '12 gennaio 2023',
-        titoloNews: '18^ g.Barletta - Molfetta 1-1',
-        descrizioneNews: 'Finale al "Manzi-Chiapulin", 1-1 tra Barletta e Molfetta',
-        linkNews: true,
-        urllinkNews: '/',
-      },
-    ];
+      this.newsService.getTotaleNews().subscribe({
+        next: (response) => {
+          this.newsArray = response;
+        },
+      });
   }
 
   caricamentoSquadre() {
@@ -81,6 +54,11 @@ export class PageIntroComponent implements OnInit, OnDestroy {
       ['assets/intro/squadre/SanMarzanoCalcio.png', 'assets/intro/squadre/TeamAltamura.png'],
     ];
   }
+
+  navigate() {
+    this.router.navigate(['/homepage']);
+  }
+
   ngOnDestroy(): void {
     this.subscription.forEach((item) => item.unsubscribe());
   }

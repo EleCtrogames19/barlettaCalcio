@@ -2,7 +2,7 @@
   class="galleryClassifica mx-1 flex flex-column align-items-center"
   [ngStyle]="{ height: archivio ? 'calc(100vh - 167px)' : '' }"
 >
-  <section [ngClass]="archivio ? 'w-7' : 'w6'">
+  <section [ngClass]="screenWidth<1000 ? 'w-full':archivio ? 'w-7' : 'w-full'">
     <article
       *ngIf="paginaAttuale !== 'news'"
       class="titleIframe text-flicker-in-glow"
@@ -20,7 +20,7 @@
         [showItemNavigatorsOnHover]="true"
         [circular]="true"
         [autoPlay]="true"
-        [transitionInterval]="3000"
+        [transitionInterval]="9000"
         [containerStyle]="{ width: '100%' }"
         [containerClass]="galleriaClass()"
       >
@@ -29,12 +29,12 @@
             [src]="item.itemImageSrc"
             [ngClass]="paginaAttuale !== 'news' ? 'immagine' : ''"
             [ngStyle]="{
-              height: !archivio || fullscreen
+              height: fullscreen
                 ? 'auto'
                 : screenWidth > 800
                 ? '300px'
                 : '245px',
-                width: !archivio ?'50%':''
+
             }"
             [alt]="item.alt"
             aria-label="immagine"
@@ -78,7 +78,7 @@
       </p-galleria>
     </article>
   </section>
-  <section class="w-7 mt-6" *ngIf="video.length > 0 && archivio">
+  <section class="mt-6" [ngClass]="screenWidth<1000 ? 'w-full':'w-7'" *ngIf="video.length > 0 && archivio">
     <article
       *ngIf="paginaAttuale !== 'news'"
       class="titleIframe text-flicker-in-glow"
@@ -87,7 +87,7 @@
     </article>
     <section *ngFor="let item of newVideo">
       <article class="container-video">
-        <video controls height="350">
+        <video controls [height]="350" width="100%">
           <source
             [src]="item.itemVideoSrc"
             class="immagine"
@@ -110,7 +110,7 @@
   </section>
   <section>
     <article *ngIf="!archivio && screenWidth > 1000">
-      <app-sponsor [sponsorArray]="sponsorArray1"></app-sponsor>
+      <app-sponsor [sponsorArray]="sponsorArray1" class="galleria"></app-sponsor>
     </article>
   </section>
 </section>

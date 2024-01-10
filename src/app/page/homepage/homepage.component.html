@@ -1,4 +1,4 @@
-<section class="homepage mx-1">
+<section class="homepage">
   <article class="img">
     <img
       src="assets/homepage/headerHomepage.jpg"
@@ -8,12 +8,13 @@
     />
   </article>
   <app-navbar class="margineNavbar"></app-navbar>
+  <section class="mx-1">
   <article class="classifica-galleria-sponsor">
     <section class="flex justify-content-center">
       <img src="assets/sponsor/LogoOftavision.jpg" width="20%" alt="sponsor" />
     </section>
-    <section class="galleryClassifica ml-1">
-      <app-galleria-dinamica [images]="images" [paginaAttuale]="'homepage'" [archivio]="false"></app-galleria-dinamica>
+    <section class="galleryClassifica md:ml-1">
+      <app-galleria-dinamica [elementi]="elementi" [paginaAttuale]="'homepage'" [archivio]="false"></app-galleria-dinamica>
       <div>
         <article class="titleIframe text-flicker-in-glow">
           CLASSIFICA
@@ -50,7 +51,7 @@
           class="iframe"
           src="https://www.tuttocampo.it/WidgetV2/Marcatori/3e2f3bf2-63e9-4fd0-8c55-feac84621b54"
           width="100%"
-          height="600"
+          height="680"
           scrolling="no"
           frameborder="0"
         ></iframe>
@@ -81,4 +82,5 @@
     </div>
     <app-sponsor [sponsorArray]="sponsorArray2"></app-sponsor>
   </article>
+  </section>
 </section>

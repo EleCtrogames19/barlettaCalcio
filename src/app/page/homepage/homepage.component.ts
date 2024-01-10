@@ -3,6 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Immagine, Sponsor, Video } from '../../models/interfacce';
 import { BehaviorSubject } from 'rxjs';
+import { ArchivioService } from '../../service/archivio.service';
 
 @Component({
   selector: 'app-homepage',
@@ -12,9 +13,9 @@ import { BehaviorSubject } from 'rxjs';
 export class HomepageComponent implements OnInit {
   sponsorArray1: BehaviorSubject<Sponsor[]> = new BehaviorSubject<Sponsor[]>([]);
   sponsorArray2: BehaviorSubject<Sponsor[]> = new BehaviorSubject<Sponsor[]>([]);
-  images: Immagine[] = [];
+  elementi: BehaviorSubject<{ foto: any; video: any }> = new BehaviorSubject<{ foto: any; video: any }>({foto:[],video:[]});
 
-  constructor() {}
+  constructor(private archivioService: ArchivioService) {}
 
   ngOnInit() {
     this.sponsorArray1.next([
@@ -57,12 +58,19 @@ export class HomepageComponent implements OnInit {
         src: 'assets/sponsor/cobbler.jpg',
       },
     ]);
-    this.images.push({
-      id: '0',
-      itemImageSrc: 'assets/galleria/606652.jpg',
-      thumbnailImageSrc: 'assets/galleria/imgp3205_s.jpg',
-      alt: 'Description for Image 1',
-      title: 'Title 1',
+
+    this.archivioService.getStagioni().subscribe({
+      next: (stagioniResponse: string[]) => {
+        let stagioni: string[] = [...new Set(stagioniResponse)];
+        console.log('response', stagioni);
+        let splitStagione: string[] = stagioni[0].split('-');
+        this.archivioService.getFotoByStagione(+splitStagione[0], +splitStagione[1]).subscribe({
+          next: (foto: Immagine[]): void => {
+            console.log('foto',foto)
+            this.elementi.next({ foto: [...foto], video: [] });
+          },
+        });
+      },
     });
   }
 }

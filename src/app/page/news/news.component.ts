@@ -3,7 +3,7 @@ import { Immagine, Video, newsArticolo } from '../../models/interfacce';
 import { Router } from '@angular/router';
 import { newsService } from '../../service/news.service';
 import { DimensioneSchermoService } from '../../service/dimensioneSchermo.service';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { ArchivioService } from '../../service/archivio.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -37,6 +37,9 @@ export class NewsComponent implements OnInit, OnDestroy {
   video: Video[] = [];
   tutteVideo: Video[] = [];
   cambioPaginaVideo: Video[] = [];
+
+  elementi: BehaviorSubject<{ foto: any; video: any }> = new BehaviorSubject<{ foto: any; video: any }>({ foto: [], video: [] });
+  abilitaGalleria: boolean = false;
 
   constructor(private router: Router, private newsService: newsService, private dimensioneSchermoService: DimensioneSchermoService, private archivioService: ArchivioService) {}
 
@@ -88,7 +91,7 @@ export class NewsComponent implements OnInit, OnDestroy {
             console.error(`errore: ${errore}`);
           },
           complete: (): void => {
-            console.log('stagione',this.stagione);
+            console.log('stagione', this.stagione);
             let spitStagione: string[] = this.stagione.split('-');
             console.log('spitStagione', spitStagione);
             this.sottoscrizioni.push(
@@ -98,6 +101,8 @@ export class NewsComponent implements OnInit, OnDestroy {
                   this.cambioPaginaFoto = [...this.images];
                   this.images = [...this.images.slice(0, 11)];
                   this.totalRecords = this.cambioPaginaFoto.length;
+                  this.elementi.next({ foto: this.images, video: this.video });
+                  this.abilitaGalleria = true;
                 },
               })
             );
@@ -106,7 +111,9 @@ export class NewsComponent implements OnInit, OnDestroy {
                 next: (video: Video[]): void => {
                   this.video = [...video];
                   this.cambioPaginaVideo = [...this.video];
-                  this.video = [...this.video.slice(0, 11)];
+                  this.video = [...this.cambioPaginaVideo.slice(0, 11)];
+                  this.elementi.next({ foto: this.images, video: this.video });
+                  this.abilitaGalleria = true;
                 },
               })
             );
@@ -121,6 +128,7 @@ export class NewsComponent implements OnInit, OnDestroy {
     this.router.navigate([url]);
   }
   cambioStagione(): void {
+    this.abilitaGalleria = false;
     if (this.stagione === 'TUTTE') {
       this.newsArray = this.tutteStagioni;
       this.images = this.tutteImages;
@@ -144,7 +152,9 @@ export class NewsComponent implements OnInit, OnDestroy {
             next: (foto: Immagine[]): void => {
               this.images = [...foto];
               this.cambioPaginaFoto = [...this.images];
-              this.images = [...this.images.slice(0, 11)];
+              this.totalRecords = this.cambioPaginaFoto.length;
+              this.elementi.next({ foto: this.images, video: this.video });
+              this.abilitaGalleria = true;
             },
           })
         );
@@ -153,13 +163,15 @@ export class NewsComponent implements OnInit, OnDestroy {
             next: (video: Video[]): void => {
               this.video = [...video];
               this.cambioPaginaVideo = [...this.video];
-              this.video = [...this.video.slice(0, 11)];
+              this.video = [...this.video.slice(0, 1)];
+              this.totalRecords = this.cambioPaginaVideo.length;
+              this.elementi.next({ foto: this.images, video: this.video });
+              this.abilitaGalleria = true;
             },
           })
         );
       }
     }
-    this.totalRecords = this.stagioni.length;
   }
   onPageChange(event: any): void {
     this.first = event.first;

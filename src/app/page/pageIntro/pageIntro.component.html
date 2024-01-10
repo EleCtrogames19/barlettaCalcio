@@ -5,7 +5,7 @@
       *ngTemplateOutlet="squadre; context: { squadre: squadreInit1 }"
     ></ng-container>
   </section>
-<section>
+<section class="flex flex-column gap-3 mt-3 xl:mt-0 xl:gap-0">
     <p class="text-flicker-in-glow title">barlettacalcio.it</p>
     <article class="contenuto">
       <ng-container *ngTemplateOutlet="entrata"></ng-container>
@@ -61,7 +61,7 @@
           <p class="dataNews">{{ news.data }}</p>
         </article>
         <P class="titleNews mt-3">{{ news.titoloNews }}</P>
-        <a *ngIf="news.linkNews" [href]="news.urllinkNews" class="linkNews"
+        <a *ngIf="news.linkNews && news.urllinkNews" [href]="news.urllinkNews" class="linkNews"
           >Vai alla galleria</a
         >
         <p class="descrizioneNews">{{ news.descrizioneNews }}</p>
@@ -95,7 +95,7 @@
 <ng-template #entrata>
   <section class="sezione-immagine-entra">
     <article class="article-img">
-      <a href="/homepage">
+      <a (click)="navigate()">
         <img
           src="assets/intro/intro.jpg"
           alt="Click per entrare..."
@@ -108,7 +108,7 @@
 <ng-template #entrataMobile>
   <section class="sezione-immagine-entra">
     <article class="article-img-mobile">
-      <a href="/homepage">
+      <a (click)="navigate()">
         <img
           src="assets/intro/intro.jpg"
           alt="Click per entrare..."
